@@ -1,66 +1,172 @@
-# CE-RISE Data Model Template
+# CE-RISE Circularity and End-of-Life
 
-[![DOI](https://zenodo.org/badge/DOI/TOBEOBTAINED.svg)](https://doi.org/TOBEOBTAINED) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/<repo-name>/)
+[![DOI](https://zenodo.org/badge/DOI/TOBEOBTAINED.svg)](https://doi.org/TOBEOBTAINED) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/circularity-and-eol/)
 
-This repository provides the **official template** for creating CE-RISE data models.  
-It defines the standard structure, tooling, and workflow used across all model projects.
+Repository for the data model capturing circularity and end-of-life information for products, including design-for-circularity attributes, performance factors and scores, and end-of-life pathways such as disassembly, recycling, treatment options, and CRM recovery-related information.
 
 
 ---
 
 ## Data Model Structure
-Put here description of data model structure.
+
+The Circularity and End-of-Life data model provides a comprehensive framework for capturing circular economy principles throughout a product's lifecycle. It enables tracking of design decisions that support circularity, performance metrics that measure circular potential, and detailed end-of-life pathways including material recovery, recycling rates, and critical raw material (CRM) recovery strategies.
 
 ### Key Design Principles
 
+1. **Design-Stage Integration**: Captures how products are designed with circularity in mind from inception
+2. **Performance Measurement**: Quantifiable metrics for assessing circular economy performance
+3. **End-of-Life Clarity**: Detailed pathways for product disposal, recovery, and material reintegration
+4. **CRM Focus**: Special attention to Critical Raw Materials recovery and tracking
+5. **Standards Alignment**: Integration with circular economy standards and recycling classification systems
 
 ### Core Hierarchy
 
 ```
-JustAnExample (root)
-├── 1. GeneralProductInformation
-│   ├── LotBatchNumber
-│   ├── GTIN14
-│   ├── SerialNumber
-│   ├── ProductImages
-│   ├── ProductType
-│   └── UniqueProductIdentifier
-
+CircularityAndEOL (root)
+├── 1. DesignForCircularity
+│   ├── ModularDesign
+│   │   ├── ModularityLevel
+│   │   ├── InterchangeableParts
+│   │   └── StandardizedInterfaces
+│   ├── MaterialSelection
+│   │   ├── RecycledContent (%)
+│   │   ├── RenewableContent (%)
+│   │   ├── HazardousSubstances
+│   │   └── MaterialPassport
+│   ├── DisassemblyFeatures
+│   │   ├── DisassemblyTime
+│   │   ├── RequiredTools
+│   │   ├── DisassemblyInstructions
+│   │   └── FastenerTypes
+│   └── DurabilityFeatures
+│       ├── ExpectedLifetime
+│       ├── RepairabilityIndex
+│       ├── UpgradeCapability
+│       └── MaintenanceSchedule
+├── 2. ProductPerformanceFactors
+│   ├── ResourceEfficiency
+│   │   ├── MaterialIntensity
+│   │   ├── EnergyEfficiency
+│   │   ├── WaterFootprint
+│   │   └── WasteGeneration
+│   ├── LifespanFactors
+│   │   ├── MeanTimeBetweenFailures
+│   │   ├── WarrantyPeriod
+│   │   ├── ServiceLife
+│   │   └── ObsolescenceFactors
+│   └── CircularCapability
+│       ├── ReusePotential
+│       ├── RefurbishmentPotential
+│       ├── RemanufacturingPotential
+│       └── RecyclingPotential
+├── 3. ProductPerformanceScores
+│   ├── CircularityScore
+│   │   ├── OverallScore (0-100)
+│   │   ├── ScoringMethodology
+│   │   ├── BenchmarkComparison
+│   │   └── ImprovementPotential
+│   ├── EnvironmentalScores
+│   │   ├── CarbonFootprintScore
+│   │   ├── ResourceDepletionScore
+│   │   ├── EcotoxicityScore
+│   │   └── BiodiversityImpactScore
+│   └── SocialScores
+│       ├── RepairAccessibilityScore
+│       ├── LocalValueRetentionScore
+│       └── JobCreationPotentialScore
+└── 4. EndOfLifeInformation
+    ├── CollectionAndSorting
+    │   ├── CollectionSchemes
+    │   ├── SortingInstructions
+    │   ├── WasteClassification
+    │   └── TakeBackPrograms
+    ├── RecyclingPathways
+    │   ├── RecyclableMaterials
+    │   │   ├── MaterialType
+    │   │   ├── RecyclingRate (%)
+    │   │   └── RecyclingProcess
+    │   ├── NonRecyclableMaterials
+    │   │   ├── MaterialType
+    │   │   ├── Percentage
+    │   │   └── DisposalMethod
+    │   └── RecyclingInfrastructure
+    │       ├── RequiredTechnology
+    │       └── GeographicAvailability
+    ├── CRMRecovery
+    │   ├── CriticalMaterialsList
+    │   │   ├── MaterialName
+    │   │   ├── Quantity
+    │   │   └── Concentration
+    │   ├── RecoveryMethods
+    │   │   ├── ExtractionProcess
+    │   │   ├── RecoveryRate (%)
+    │   │   └── EconomicViability
+    │   └── SecondaryRawMaterials
+    │       ├── QualityGrade
+    │       └── MarketDemand
+    └── TreatmentOptions
+        ├── EnergyRecovery
+        │   ├── CaloricValue
+        │   └── EmissionFactors
+        ├── Landfilling
+        │   ├── LandfillClassification
+        │   └── LeachingPotential
+        └── SpecialTreatment
+            ├── HazardousWasteTreatment
+            └── BiologicalTreatment
 ```
 
 ### Workflow Sequence
 
-#### **Step 1: Just another example** 
-Basic product identification with multiple identifier types:
-- **LotBatchNumber**: Lot/batch tracking information
-- **GTIN14**: Global Trade Item Number (14-digit format with GS1 integration)
-- **SerialNumber**: Individual product serial numbers
-- **ProductImages**: Product images for branding/visual identification (comma-separated URLs)
-- **ProductType**: Product classification (3-digit GTIN prefix or alphanumeric code)
-- **UniqueProductIdentifier**: Enables web link to product passport
+#### **Step 1: DesignForCircularity**
+Captures design decisions that enable circular economy principles:
+- **ModularDesign**: Component modularity, standardization, and interchangeability
+- **MaterialSelection**: Recycled/renewable content, hazardous substances tracking
+- **DisassemblyFeatures**: Time, tools, instructions for product disassembly
+- **DurabilityFeatures**: Lifetime expectations, repairability, upgrade paths
+
+#### **Step 2: ProductPerformanceFactors**
+Quantifiable factors that influence circular performance:
+- **ResourceEfficiency**: Material intensity, energy/water use, waste generation
+- **LifespanFactors**: MTBF, warranty, service life, obsolescence planning
+- **CircularCapability**: Potential for reuse, refurbishment, remanufacturing, recycling
+
+#### **Step 3: ProductPerformanceScores**
+Aggregated scoring metrics for circularity assessment:
+- **CircularityScore**: Overall 0-100 score with methodology and benchmarks
+- **EnvironmentalScores**: Carbon, resource depletion, ecotoxicity impacts
+- **SocialScores**: Repair accessibility, local value retention, job creation
+
+#### **Step 4: EndOfLifeInformation**
+Comprehensive end-of-life pathways and material recovery:
+- **CollectionAndSorting**: Collection schemes, sorting instructions, waste classification
+- **RecyclingPathways**: Recyclable/non-recyclable materials, rates, infrastructure
+- **CRMRecovery**: Critical raw materials identification, recovery methods, secondary materials
+- **TreatmentOptions**: Energy recovery, landfilling, special treatment requirements
 
 ### Data Properties
 
-Each class has a corresponding value property (e.g., `name_value`, `company_id_value`) that holds the actual data. All value properties are string type except where specified otherwise.
+Each class has a corresponding value property (e.g., `modularity_level_value`, `recycling_rate_value`) that holds the actual data. All value properties are string type except where specified otherwise (percentages as float, scores as integer).
 
 #### SQL Identifiers
 
 Every data point in the model includes a `sql_identifier` annotation that serves as a unique, machine-friendly database identifier. These identifiers follow a structured namespace pattern to ensure uniqueness across the entire data model:
 
-**Pattern**: `MODEL_[category]_[specific_name]`
+**Pattern**: `circ_[category]_[specific_name]`
 
 **Features:**
-- **Product Profile Prefix**: All identifiers start, for instance, with `pro_` to clearly identify them as belonging to the Product Profile data model
-- **Hierarchical Namespacing**: Uses category prefixes (`gen_info_`, `mfr_info_`, `imp_info_`, `spec_info_`) to provide context and prevent naming conflicts
+- **Circularity Prefix**: All identifiers start with `circ_` to clearly identify them as belonging to the Circularity and End-of-Life data model
+- **Hierarchical Namespacing**: Uses category prefixes (`design_`, `perf_`, `score_`, `eol_`) to provide context and prevent naming conflicts
 - **Database-Friendly**: Uses underscores and avoids special characters for SQL compatibility
 - **Unique Across Model**: No duplicate identifiers, even when similar concepts appear in different parts of the hierarchy
 - **Reasonable Length**: Abbreviated but meaningful names that balance clarity with practical database usage
 
 **Examples:**
-- `pro_gen_info_gtin14` - GTIN-14 identifier in General Product Information
-- `pro_mfr_info_facility` - Manufacturing facility in Manufacturer Information  
-- `pro_imp_info_eori` - EORI number in Import/Export Information
-- `pro_spec_info_materials` - Material composition in Product Specifications
+- `circ_design_modularity_level` - Modularity level in Design for Circularity
+- `circ_perf_recycling_potential` - Recycling potential in Performance Factors
+- `circ_score_overall_circularity` - Overall circularity score
+- `circ_eol_crm_recovery_rate` - Critical material recovery rate
+- `circ_eol_recycling_rate` - Material recycling rate
 
 This identifier system enables seamless integration with databases and ensures clear data model composition when combining with other CE-RISE data models.
 
@@ -70,10 +176,18 @@ This identifier system enables seamless integration with databases and ensures c
 
 | Step | Component | Criticalities Identified | Solutions Implemented | Status | Missing/TODO |
 |------|-----------|-------------------------|----------------------|--------|--------------|
-| **1** | **ExampleExampleExample** | • Unique product identifier lacks precision and standards<br>• No reference integration with discoverability/registries<br>• Missing serial number and lot number storage<br>• No connection to standard product nomenclature<br>• No product description and branding<br>• No classification for grouping products | • Added GS1 prefix and ontology integration<br>• Implemented GTIN-14 + serial number approach<br>• Added Schema.org prefix<br>• Created GTIN-14, Serial number, Lot/batch number subclasses<br>• Added ProductImages (comma-separated image URLs with format validation)<br>• Added ProductType (3-digit GTIN prefix or alphanumeric classification)<br>• Referenced UNTP framework for discoverability | **COMPLETED** | • UNTP Identity Resolver integration 
+| **1** | **DesignForCircularity** | • Lack of standardized modularity metrics<br>• Material passport integration<br>• Disassembly time estimation methods<br>• Repairability index standards | • Modular design classification system<br>• Material selection criteria<br>• Disassembly instruction templates<br>• Durability metrics framework | **PLANNED** | • Integration with material databases<br>• Automated disassembly time calculation<br>• Repairability score harmonization |
+| **2** | **ProductPerformanceFactors** | • Resource efficiency measurement<br>• Lifespan prediction accuracy<br>• Circular capability assessment<br>• Data collection challenges | • Resource efficiency indicators<br>• Lifespan factor definitions<br>• Circular capability matrix<br>• Performance benchmarks | **PLANNED** | • Real-time performance monitoring<br>• Predictive obsolescence models<br>• Industry-specific benchmarks |
+| **3** | **ProductPerformanceScores** | • Scoring methodology transparency<br>• Benchmark selection<br>• Score aggregation methods<br>• Comparability across products | • 0-100 scoring scale<br>• Multi-criteria assessment<br>• Weighted scoring system<br>• Improvement tracking | **PLANNED** | • Dynamic scoring algorithms<br>• Peer comparison tools<br>• Score certification process |
+| **4** | **EndOfLifeInformation** | • Collection scheme variety<br>• Recycling rate accuracy<br>• CRM identification and tracking<br>• Treatment option optimization | • Collection pathway mapping<br>• Material-specific recycling rates<br>• CRM recovery framework<br>• Treatment hierarchy | **PLANNED** | • Real-time recycling infrastructure data<br>• CRM market price integration<br>• Automated waste classification |
 
 ### Integration Opportunities
 
+- **Design Software**: CAD/CAM systems for modularity and disassembly analysis
+- **Material Databases**: Integration with material property and composition databases
+- **Recycling Infrastructure**: Connection to regional recycling facility databases
+- **CRM Markets**: Links to critical raw material market data and recovery technologies
+- **Standards Bodies**: Alignment with ISO 14040 series, EN 45555 series, and circular economy standards
 
 
 ---
@@ -83,7 +197,7 @@ This identifier system enables seamless integration with databases and ensures c
 Release artifacts for each version (`schema.json`, `shacl.ttl`, `model.owl`)  
 are served directly from this URL:
 ```
-https://ce-rise-models.codeberg.page/<repo-name>/
+https://ce-rise-models.codeberg.page/circularity-and-eol/
 ```
 
 
@@ -94,7 +208,7 @@ https://ce-rise-models.codeberg.page/<repo-name>/
 If you want to view the files published for version `v1.2.0`, open:
 
 ```
-https://codeberg.org/CE-RISE-models/<repo-name>/src/tag/pages-v1.2.0/generated/
+https://codeberg.org/CE-RISE-models/circularity-and-eol/src/tag/pages-v1.2.0/generated/
 ```
 
 Files available in that directory typically include:
@@ -124,6 +238,4 @@ Attribution: CE-RISE project (Grant Agreement No. 101092281) and the individual 
 </a>
 
 Developed by NILU (Riccardo Boero — ribo@nilu.no) within the CE-RISE project.  
-
-
 
