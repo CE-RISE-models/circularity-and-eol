@@ -1,0 +1,715 @@
+@prefix circ: <https://ce-rise-models.codeberg.page/circularity-and-eol/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+circ:CircularityAndEOL a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Root container for circularity and end-of-life information" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class circ:DesignForCircularity ;
+            sh:description "Design features that enable circular economy principles" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path circ:design_for_circularity ],
+        [ sh:class circ:ProductPerformanceFactors ;
+            sh:description "Quantifiable factors influencing circular performance" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path circ:product_performance_factors ],
+        [ sh:class circ:CircularityAssessments ;
+            sh:description "Generic container for circularity assessments" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path circ:circularity_assessments ],
+        [ sh:class circ:EndOfLifeInformation ;
+            sh:description "End-of-life pathways and recovery information" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path circ:end_of_life_information ] ;
+    sh:targetClass circ:CircularityAndEOL .
+
+circ:Assessment a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A single assessment instance with methodology and results" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class circ:SubScore ;
+            sh:description "Breakdown of score components" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path circ:sub_scores ],
+        [ sh:datatype xsd:string ;
+            sh:description "Methodology used" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:assessment_methodology ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unit of score" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path circ:score_unit ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version of methodology" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path circ:assessment_version ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date of assessment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:assessment_date ],
+        [ sh:datatype xsd:string ;
+            sh:description "External reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path circ:assessment_reference ],
+        [ sh:datatype xsd:string ;
+            sh:description "Data sources used" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path circ:data_sources ],
+        [ sh:datatype xsd:string ;
+            sh:description "Valid score range" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path circ:score_range ],
+        [ sh:datatype xsd:string ;
+            sh:description "Type of assessment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:assessment_type ],
+        [ sh:datatype xsd:float ;
+            sh:description "Overall score" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path circ:assessment_score ],
+        [ sh:datatype xsd:string ;
+            sh:description "Certification status" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path circ:certification_status ] ;
+    sh:targetClass circ:Assessment .
+
+circ:CRMRecovery a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Critical raw materials recovery information" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class circ:SecondaryRawMaterials ;
+            sh:description "Secondary materials produced" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path circ:secondary_raw_materials ],
+        [ sh:class circ:CriticalMaterial ;
+            sh:description "List of critical materials" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path circ:critical_materials_list ],
+        [ sh:class circ:RecoveryMethods ;
+            sh:description "Methods for recovery" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path circ:recovery_methods ] ;
+    sh:targetClass circ:CRMRecovery .
+
+circ:CircularCapability a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Potential for circular economy strategies" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Potential for material recycling" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path circ:recycling_potential ],
+        [ sh:datatype xsd:string ;
+            sh:description "Potential for remanufacturing" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:remanufacturing_potential ],
+        [ sh:datatype xsd:string ;
+            sh:description "Potential for refurbishment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:refurbishment_potential ],
+        [ sh:datatype xsd:string ;
+            sh:description "Potential for direct reuse" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:reuse_potential ] ;
+    sh:targetClass circ:CircularCapability .
+
+circ:CircularityAssessments a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Container for circularity-related assessments of any type" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class circ:Assessment ;
+            sh:description "Collection of assessments performed" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path circ:assessments ] ;
+    sh:targetClass circ:CircularityAssessments .
+
+circ:CollectionAndSorting a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Waste collection and sorting information" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Available collection programs" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:collection_schemes ],
+        [ sh:datatype xsd:string ;
+            sh:description "Take-back program details" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path circ:take_back_programs ],
+        [ sh:datatype xsd:string ;
+            sh:description "Waste classification codes" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:waste_classification ],
+        [ sh:datatype xsd:string ;
+            sh:description "Sorting guidance" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:sorting_instructions ] ;
+    sh:targetClass circ:CollectionAndSorting .
+
+circ:CriticalMaterial a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Information about a critical raw material" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "Concentration percentage" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:concentration ],
+        [ sh:datatype xsd:float ;
+            sh:description "Quantity present" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:quantity ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of critical material" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:material_name ] ;
+    sh:targetClass circ:CriticalMaterial .
+
+circ:DesignForCircularity a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Design decisions and features that enable circular economy principles" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class circ:DurabilityFeatures ;
+            sh:description "Features enhancing product durability and longevity" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path circ:durability_features ],
+        [ sh:class circ:MaterialSelection ;
+            sh:description "Material choices supporting circularity" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path circ:material_selection ],
+        [ sh:class circ:DisassemblyFeatures ;
+            sh:description "Features facilitating product disassembly" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path circ:disassembly_features ],
+        [ sh:class circ:ModularDesign ;
+            sh:description "Modularity aspects of the product design" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path circ:modular_design ] ;
+    sh:targetClass circ:DesignForCircularity .
+
+circ:DisassemblyFeatures a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Product disassembly characteristics" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Tools needed for disassembly" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:required_tools ],
+        [ sh:datatype xsd:string ;
+            sh:description "Types of fasteners used" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path circ:fastener_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "Disassembly guidance" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:disassembly_instructions ],
+        [ sh:datatype xsd:float ;
+            sh:description "Time required for disassembly" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:disassembly_time ] ;
+    sh:targetClass circ:DisassemblyFeatures .
+
+circ:DurabilityFeatures a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Product durability and maintenance characteristics" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Repairability score or index" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:repairability_index ],
+        [ sh:datatype xsd:string ;
+            sh:description "Maintenance requirements" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path circ:maintenance_schedule ],
+        [ sh:datatype xsd:string ;
+            sh:description "Upgrade possibilities" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:upgrade_capability ],
+        [ sh:datatype xsd:float ;
+            sh:description "Expected operational lifetime" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:expected_lifetime ] ;
+    sh:targetClass circ:DurabilityFeatures .
+
+circ:EndOfLifeInformation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Comprehensive end-of-life pathways and material recovery information" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class circ:CRMRecovery ;
+            sh:description "Critical raw materials recovery" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path circ:crm_recovery ],
+        [ sh:class circ:CollectionAndSorting ;
+            sh:description "Collection and sorting systems" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path circ:collection_and_sorting ],
+        [ sh:class circ:TreatmentOptions ;
+            sh:description "Final treatment and disposal options" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path circ:treatment_options ],
+        [ sh:class circ:RecyclingPathways ;
+            sh:description "Recycling routes and infrastructure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path circ:recycling_pathways ] ;
+    sh:targetClass circ:EndOfLifeInformation .
+
+circ:EnergyRecovery a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Energy recovery from waste" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "Caloric value (MJ/kg)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:caloric_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Emission factors" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:emission_factors ] ;
+    sh:targetClass circ:EnergyRecovery .
+
+circ:Landfilling a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Landfill disposal information" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Leaching risk assessment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:leaching_potential ],
+        [ sh:datatype xsd:string ;
+            sh:description "Type of landfill" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:landfill_classification ] ;
+    sh:targetClass circ:Landfilling .
+
+circ:LifespanFactors a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Factors determining product lifespan and reliability" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "MTBF reliability metric" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:mean_time_between_failures ],
+        [ sh:datatype xsd:string ;
+            sh:description "Factors leading to obsolescence" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path circ:obsolescence_factors ],
+        [ sh:datatype xsd:float ;
+            sh:description "Warranty duration offered" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:warranty_period ],
+        [ sh:datatype xsd:float ;
+            sh:description "Expected service lifetime" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:service_life ] ;
+    sh:targetClass circ:LifespanFactors .
+
+circ:MaterialSelection a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Material composition and selection for circularity" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Material passport reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path circ:material_passport ],
+        [ sh:datatype xsd:float ;
+            sh:description "Percentage of recycled content" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:recycled_content ],
+        [ sh:datatype xsd:float ;
+            sh:description "Percentage of renewable content" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:renewable_content ],
+        [ sh:datatype xsd:string ;
+            sh:description "Hazardous substances present" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:hazardous_substances ] ;
+    sh:targetClass circ:MaterialSelection .
+
+circ:ModularDesign a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Product modularity characteristics" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Degree of product modularity" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:modularity_level ],
+        [ sh:datatype xsd:string ;
+            sh:description "Standardized connection interfaces" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:standardized_interfaces ],
+        [ sh:datatype xsd:string ;
+            sh:description "Parts that can be interchanged" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:interchangeable_parts ] ;
+    sh:targetClass circ:ModularDesign .
+
+circ:NonRecyclableMaterials a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Information about non-recyclable materials" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Type of non-recyclable material" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:material_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Disposal method required" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:disposal_method ],
+        [ sh:datatype xsd:float ;
+            sh:description "Percentage of total" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:percentage ] ;
+    sh:targetClass circ:NonRecyclableMaterials .
+
+circ:ProductPerformanceFactors a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Quantifiable factors that influence circular performance" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class circ:LifespanFactors ;
+            sh:description "Factors affecting product lifespan" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path circ:lifespan_factors ],
+        [ sh:class circ:ResourceEfficiency ;
+            sh:description "Resource efficiency metrics" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path circ:resource_efficiency ],
+        [ sh:class circ:CircularCapability ;
+            sh:description "Potential for circular economy strategies" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path circ:circular_capability ] ;
+    sh:targetClass circ:ProductPerformanceFactors .
+
+circ:RecoveryMethods a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Methods for recovering critical materials" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Economic viability assessment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:economic_viability ],
+        [ sh:datatype xsd:string ;
+            sh:description "Extraction process description" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:extraction_process ],
+        [ sh:datatype xsd:float ;
+            sh:description "Recovery rate percentage" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:recovery_rate ] ;
+    sh:targetClass circ:RecoveryMethods .
+
+circ:RecyclableMaterials a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Information about recyclable materials" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Type of recyclable material" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:material_type ],
+        [ sh:datatype xsd:float ;
+            sh:description "Recycling rate percentage" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:recycling_rate ],
+        [ sh:datatype xsd:string ;
+            sh:description "Required recycling process" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:recycling_process ] ;
+    sh:targetClass circ:RecyclableMaterials .
+
+circ:RecyclingInfrastructure a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Infrastructure requirements for recycling" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Technology needed" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:required_technology ],
+        [ sh:datatype xsd:string ;
+            sh:description "Geographic coverage" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:geographic_availability ] ;
+    sh:targetClass circ:RecyclingInfrastructure .
+
+circ:RecyclingPathways a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Material recycling pathways and infrastructure" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class circ:RecyclingInfrastructure ;
+            sh:description "Required recycling infrastructure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path circ:recycling_infrastructure ],
+        [ sh:class circ:RecyclableMaterials ;
+            sh:description "Materials that can be recycled" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path circ:recyclable_materials ],
+        [ sh:class circ:NonRecyclableMaterials ;
+            sh:description "Materials that cannot be recycled" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path circ:non_recyclable_materials ] ;
+    sh:targetClass circ:RecyclingPathways .
+
+circ:ResourceEfficiency a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Metrics related to resource use efficiency" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "Energy consumption efficiency" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:energy_efficiency ],
+        [ sh:datatype xsd:float ;
+            sh:description "Waste generated during lifecycle" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path circ:waste_generation ],
+        [ sh:datatype xsd:float ;
+            sh:description "Material use per functional unit" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:material_intensity ],
+        [ sh:datatype xsd:float ;
+            sh:description "Water consumption footprint" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:water_footprint ] ;
+    sh:targetClass circ:ResourceEfficiency .
+
+circ:SecondaryRawMaterials a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Secondary materials from recovery" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Quality grade of materials" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:quality_grade ],
+        [ sh:datatype xsd:string ;
+            sh:description "Market demand assessment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:market_demand ] ;
+    sh:targetClass circ:SecondaryRawMaterials .
+
+circ:SpecialTreatment a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Special treatment requirements" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Hazardous waste treatment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:hazardous_waste_treatment ],
+        [ sh:datatype xsd:string ;
+            sh:description "Biological treatment options" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:biological_treatment ] ;
+    sh:targetClass circ:SpecialTreatment .
+
+circ:SubScore a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Component score within an assessment" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Name of sub-score" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path circ:sub_score_name ],
+        [ sh:datatype xsd:float ;
+            sh:description "Weight in overall score" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path circ:sub_score_weight ],
+        [ sh:datatype xsd:float ;
+            sh:description "Value of sub-score" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path circ:sub_score_value ] ;
+    sh:targetClass circ:SubScore .
+
+circ:TreatmentOptions a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Final treatment and disposal options" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class circ:SpecialTreatment ;
+            sh:description "Special treatment requirements" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path circ:special_treatment ],
+        [ sh:class circ:Landfilling ;
+            sh:description "Landfilling information" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path circ:landfilling ],
+        [ sh:class circ:EnergyRecovery ;
+            sh:description "Energy recovery potential" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path circ:energy_recovery ] ;
+    sh:targetClass circ:TreatmentOptions .
+
+
