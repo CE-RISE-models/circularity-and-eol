@@ -1,6 +1,6 @@
 # CE-RISE Circularity and End-of-Life
 
-[![DOI](https://zenodo.org/badge/DOI/TOBEOBTAINED.svg)](https://doi.org/TOBEOBTAINED) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/circularity-and-eol/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17912234.svg)](https://doi.org/10.5281/zenodo.17912234) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/circularity-and-eol/)
 
 Repository for the data model capturing circularity and end-of-life information for products, including design-for-circularity attributes, performance factors and scores, and end-of-life pathways such as disassembly, recycling, treatment options, and CRM recovery-related information.
 
@@ -241,5 +241,4 @@ Attribution: CE-RISE project (Grant Agreement No. 101092281) and the individual 
   <img src="https://nilu.no/wp-content/uploads/2023/12/nilu-logo-seagreen-rgb-300px.png" alt="NILU logo" width="40"/>
 </a>
 
-Developed by NILU (Riccardo Boero — ribo@nilu.no) within the CE-RISE project.  
-
+Developed by NILU (Riccardo Boero — ribo@nilu.no) within the CE-RISE project.
