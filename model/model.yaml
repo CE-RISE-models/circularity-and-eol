@@ -1,20 +1,905 @@
-id: https://ce-rise-models.codeberg.page/template-data-model/
-name: template_data_model
+id: https://ce-rise-models.codeberg.page/circularity-and-eol/
+name: circularity-and-eol
+title: CE-RISE Circularity and End-of-Life Data Model
+description: >
+    Data model capturing circularity and end-of-life information for products,
+    including design-for-circularity attributes, performance factors and scores,
+    and end-of-life pathways such as disassembly, recycling, treatment options,
+    and CRM recovery-related information.
+license: CC BY-NC 4.0
+version: 0.0.1
+
 prefixes:
-  linkml: https://w3id.org/linkml/
-imports:
-  - linkml:types
+    linkml: https://w3id.org/linkml/
+    circ: https://ce-rise-models.codeberg.page/circularity-and-eol/
+    xsd: http://www.w3.org/2001/XMLSchema#
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    dcterms: http://purl.org/dc/terms/
+    schema: http://schema.org/
+    qudt: http://qudt.org/schema/qudt/
+    unit: http://qudt.org/vocab/unit/
+    bfo: http://purl.obolibrary.org/obo/BFO_
+    chebi: http://purl.obolibrary.org/obo/CHEBI_
+    envo: http://purl.obolibrary.org/obo/ENVO_
+    dpv: https://w3id.org/dpv#
+    odp: http://www.ontologydesignpatterns.org/cp/owl/
+    bs: https://www.iso.org/standard/
+
+default_prefix: circ
 default_range: string
-classes:
-  ExampleClass:
-    attributes:
-      example_attribute:
-        range: string
-        description: Example field
+
+imports:
+    - linkml:types
+
 slots:
-  label:
-    range: string
-    description: Human-readable label
-  sqlIdentifier:
-    range: string
-    description: Machine-friendly field name for databases
+    # Stage 1: Design for Circularity slots
+
+    # Modular Design slots
+    modularity_level_value:
+        description: "Level of modularity in product design (e.g., fully modular, partially modular, integrated)"
+        range: string
+        annotations:
+            owl.filler: odp:hasModularityLevel
+            sql_identifier: circ_design_modularity_level
+
+    interchangeable_parts_value:
+        description: "List of parts that can be interchanged with standard components"
+        range: string
+        annotations:
+            owl.filler: circ:hasInterchangeableParts
+            sql_identifier: circ_design_interchangeable_parts
+
+    standardized_interfaces_value:
+        description: "Description of standardized interfaces used in the product"
+        range: string
+        annotations:
+            owl.filler: bs:74348 # ISO/IEC 2382-1:2015 interface standard reference
+            sql_identifier: circ_design_standard_interfaces
+
+    # Material Selection slots
+    recycled_content_value:
+        description: "Percentage of recycled materials in the product"
+        range: float
+        annotations:
+            owl.filler: circ:recycledContentPercentage
+            sql_identifier: circ_design_recycled_content
+
+    renewable_content_value:
+        description: "Percentage of renewable materials in the product"
+        range: float
+        annotations:
+            owl.filler: circ:renewableContentPercentage
+            sql_identifier: circ_design_renewable_content
+
+    hazardous_substances_value:
+        description: "List of hazardous substances present in the product"
+        range: string
+        annotations:
+            owl.filler: chebi:78298 # CHEBI hazardous substance reference
+            sql_identifier: circ_design_hazardous_substances
+
+    material_passport_value:
+        description: "Reference or link to material passport documentation"
+        range: string
+        annotations:
+            owl.filler: circ:hasMaterialPassport
+            sql_identifier: circ_design_material_passport
+
+    # Disassembly Features slots
+    disassembly_time_value:
+        description: "Estimated time required for complete disassembly (in minutes)"
+        range: float
+        annotations:
+            owl.filler: circ:disassemblyTime
+            sql_identifier: circ_design_disassembly_time
+
+    required_tools_value:
+        description: "List of tools required for disassembly"
+        range: string
+        annotations:
+            owl.filler: circ:requiredDisassemblyTools
+            sql_identifier: circ_design_required_tools
+
+    disassembly_instructions_value:
+        description: "Reference to disassembly instructions or inline instructions"
+        range: string
+        annotations:
+            owl.filler: schema:instructions
+            sql_identifier: circ_design_disassembly_instructions
+
+    fastener_types_value:
+        description: "Types of fasteners used in product assembly"
+        range: string
+        annotations:
+            owl.filler: circ:fastenerTypes
+            sql_identifier: circ_design_fastener_types
+
+    # Durability Features slots
+    expected_lifetime_value:
+        description: "Expected product lifetime under normal use conditions (in years)"
+        range: float
+        annotations:
+            owl.filler: schema:expectedLifetime
+            sql_identifier: circ_design_expected_lifetime
+
+    repairability_index_value:
+        description: "Repairability index score or classification"
+        range: string
+        annotations:
+            owl.filler: circ:repairabilityIndex
+            sql_identifier: circ_design_repairability_index
+
+    upgrade_capability_value:
+        description: "Description of upgrade possibilities and modular improvements"
+        range: string
+        annotations:
+            owl.filler: circ:upgradeCapability
+            sql_identifier: circ_design_upgrade_capability
+
+    maintenance_schedule_value:
+        description: "Recommended maintenance schedule and intervals"
+        range: string
+        annotations:
+            owl.filler: schema:maintenanceSchedule
+            sql_identifier: circ_design_maintenance_schedule
+
+    # Stage 2: Product Performance Factors slots
+
+    # Resource Efficiency slots
+    material_intensity_value:
+        description: "Material intensity per functional unit (kg/unit)"
+        range: float
+        annotations:
+            owl.filler: qudt:materialIntensity
+            sql_identifier: circ_perf_material_intensity
+
+    energy_efficiency_value:
+        description: "Energy efficiency rating or consumption (kWh/unit)"
+        range: float
+        annotations:
+            owl.filler: qudt:energyEfficiency
+            sql_identifier: circ_perf_energy_efficiency
+
+    water_footprint_value:
+        description: "Water consumption per functional unit (liters/unit)"
+        range: float
+        annotations:
+            owl.filler: envo:01001026 # ENVO water footprint
+            sql_identifier: circ_perf_water_footprint
+
+    waste_generation_value:
+        description: "Waste generated during product lifecycle (kg)"
+        range: float
+        annotations:
+            owl.filler: circ:wasteGeneration
+            sql_identifier: circ_perf_waste_generation
+
+    # Lifespan Factors slots
+    mean_time_between_failures_value:
+        description: "Mean time between failures (MTBF) in hours"
+        range: float
+        annotations:
+            owl.filler: bfo:0000038 # BFO temporal region for reliability
+            sql_identifier: circ_perf_mtbf
+
+    warranty_period_value:
+        description: "Warranty period offered (in years)"
+        range: float
+        annotations:
+            owl.filler: schema:warrantyPeriod
+            sql_identifier: circ_perf_warranty_period
+
+    service_life_value:
+        description: "Expected service life under normal conditions (in years)"
+        range: float
+        annotations:
+            owl.filler: schema:serviceLife
+            sql_identifier: circ_perf_service_life
+
+    obsolescence_factors_value:
+        description: "Factors contributing to product obsolescence"
+        range: string
+        annotations:
+            owl.filler: circ:obsolescenceFactors
+            sql_identifier: circ_perf_obsolescence_factors
+
+    # Circular Capability slots
+    reuse_potential_value:
+        description: "Potential for product or component reuse (qualitative or percentage)"
+        range: string
+        annotations:
+            owl.filler: circ:reusePotential
+            sql_identifier: circ_perf_reuse_potential
+
+    refurbishment_potential_value:
+        description: "Potential for product refurbishment (qualitative or percentage)"
+        range: string
+        annotations:
+            owl.filler: circ:refurbishmentPotential
+            sql_identifier: circ_perf_refurbish_potential
+
+    remanufacturing_potential_value:
+        description: "Potential for product remanufacturing (qualitative or percentage)"
+        range: string
+        annotations:
+            owl.filler: circ:remanufacturingPotential
+            sql_identifier: circ_perf_remanufacture_potential
+
+    recycling_potential_value:
+        description: "Potential for material recycling (qualitative or percentage)"
+        range: string
+        annotations:
+            owl.filler: circ:recyclingPotential
+            sql_identifier: circ_perf_recycling_potential
+
+    # Stage 3: Circularity Assessments slots
+
+    assessment_type_value:
+        description: "Type or category of assessment performed"
+        range: string
+        annotations:
+            owl.filler: dcterms:type
+            sql_identifier: circ_assessment_type
+
+    assessment_methodology_value:
+        description: "Methodology or framework used for assessment"
+        range: string
+        annotations:
+            owl.filler: dcterms:methodUsed
+            sql_identifier: circ_assessment_methodology
+
+    assessment_date_value:
+        description: "Date when assessment was performed"
+        range: date
+        annotations:
+            owl.filler: dcterms:date
+            sql_identifier: circ_assessment_date
+
+    assessment_version_value:
+        description: "Version of the assessment methodology used"
+        range: string
+        annotations:
+            owl.filler: dcterms:hasVersion
+            sql_identifier: circ_assessment_version
+
+    assessment_score_value:
+        description: "Overall assessment score or result"
+        range: float
+        annotations:
+            owl.filler: circ:assessmentScore
+            sql_identifier: circ_assessment_score
+
+    score_unit_value:
+        description: "Unit of measurement for the assessment score"
+        range: string
+        annotations:
+            owl.filler: qudt:unit
+            sql_identifier: circ_assessment_score_unit
+
+    score_range_value:
+        description: "Valid range for the assessment score (e.g., 0-100, A-F)"
+        range: string
+        annotations:
+            owl.filler: circ:scoreRange
+            sql_identifier: circ_assessment_score_range
+
+    data_sources_value:
+        description: "Sources of data used for the assessment"
+        range: string
+        annotations:
+            owl.filler: dcterms:source
+            sql_identifier: circ_assessment_data_sources
+
+    assessment_reference_value:
+        description: "External reference or URI to full assessment details"
+        range: string
+        annotations:
+            owl.filler: dcterms:references
+            sql_identifier: circ_assessment_reference
+
+    certification_status_value:
+        description: "Certification or verification status of the assessment"
+        range: string
+        annotations:
+            owl.filler: circ:certificationStatus
+            sql_identifier: circ_assessment_certification
+
+    # SubScore slots
+    sub_score_name_value:
+        description: "Name or identifier of a sub-score component"
+        range: string
+        annotations:
+            owl.filler: rdfs:label
+            sql_identifier: circ_assessment_sub_score_name
+
+    sub_score_value_value:
+        description: "Value of the sub-score component"
+        range: float
+        annotations:
+            owl.filler: circ:subScoreValue
+            sql_identifier: circ_assessment_sub_score_value
+
+    sub_score_weight_value:
+        description: "Weight or importance of the sub-score in overall calculation"
+        range: float
+        annotations:
+            owl.filler: circ:subScoreWeight
+            sql_identifier: circ_assessment_sub_score_weight
+
+    # Stage 4: End of Life Information slots
+
+    # Collection and Sorting slots
+    collection_schemes_value:
+        description: "Available collection schemes and programs"
+        range: string
+        annotations:
+            owl.filler: circ:collectionSchemes
+            sql_identifier: circ_eol_collection_schemes
+
+    sorting_instructions_value:
+        description: "Instructions for waste sorting and separation"
+        range: string
+        annotations:
+            owl.filler: schema:instructions
+            sql_identifier: circ_eol_sorting_instructions
+
+    waste_classification_value:
+        description: "Waste classification codes and categories"
+        range: string
+        annotations:
+            owl.filler: envo:00002001 # ENVO waste material
+            sql_identifier: circ_eol_waste_classification
+
+    take_back_programs_value:
+        description: "Manufacturer or retailer take-back program details"
+        range: string
+        annotations:
+            owl.filler: circ:takeBackProgram
+            sql_identifier: circ_eol_take_back_programs
+
+    # Recycling Pathways slots
+    material_type_recyclable_value:
+        description: "Type of recyclable material"
+        range: string
+        annotations:
+            owl.filler: chebi:24431 # CHEBI chemical entity
+            sql_identifier: circ_eol_recyclable_material_type
+
+    recycling_rate_value:
+        description: "Percentage of material that can be recycled"
+        range: float
+        annotations:
+            owl.filler: circ:recyclingRate
+            sql_identifier: circ_eol_recycling_rate
+
+    recycling_process_value:
+        description: "Description of recycling process required"
+        range: string
+        annotations:
+            owl.filler: circ:recyclingProcess
+            sql_identifier: circ_eol_recycling_process
+
+    material_type_non_recyclable_value:
+        description: "Type of non-recyclable material"
+        range: string
+        annotations:
+            owl.filler: chebi:24431
+            sql_identifier: circ_eol_non_recyclable_material_type
+
+    non_recyclable_percentage_value:
+        description: "Percentage of non-recyclable materials"
+        range: float
+        annotations:
+            owl.filler: circ:nonRecyclablePercentage
+            sql_identifier: circ_eol_non_recyclable_percentage
+
+    disposal_method_value:
+        description: "Method for disposal of non-recyclable materials"
+        range: string
+        annotations:
+            owl.filler: circ:disposalMethod
+            sql_identifier: circ_eol_disposal_method
+
+    required_technology_value:
+        description: "Technology required for recycling"
+        range: string
+        annotations:
+            owl.filler: circ:requiredTechnology
+            sql_identifier: circ_eol_required_technology
+
+    geographic_availability_value:
+        description: "Geographic availability of recycling infrastructure"
+        range: string
+        annotations:
+            owl.filler: schema:areaServed
+            sql_identifier: circ_eol_geographic_availability
+
+    # CRM Recovery slots
+    critical_material_name_value:
+        description: "Name of critical raw material"
+        range: string
+        annotations:
+            owl.filler: circ:criticalMaterialName
+            sql_identifier: circ_eol_crm_material_name
+
+    crm_quantity_value:
+        description: "Quantity of critical material (in grams or kilograms)"
+        range: float
+        annotations:
+            owl.filler: qudt:quantity
+            sql_identifier: circ_eol_crm_quantity
+
+    crm_concentration_value:
+        description: "Concentration of critical material (percentage)"
+        range: float
+        annotations:
+            owl.filler: circ:concentration
+            sql_identifier: circ_eol_crm_concentration
+
+    extraction_process_value:
+        description: "Process for extracting critical materials"
+        range: string
+        annotations:
+            owl.filler: circ:extractionProcess
+            sql_identifier: circ_eol_extraction_process
+
+    crm_recovery_rate_value:
+        description: "Recovery rate for critical materials (percentage)"
+        range: float
+        annotations:
+            owl.filler: circ:recoveryRate
+            sql_identifier: circ_eol_crm_recovery_rate
+
+    economic_viability_value:
+        description: "Economic viability assessment of CRM recovery"
+        range: string
+        annotations:
+            owl.filler: circ:economicViability
+            sql_identifier: circ_eol_economic_viability
+
+    quality_grade_value:
+        description: "Quality grade of secondary raw materials"
+        range: string
+        annotations:
+            owl.filler: circ:qualityGrade
+            sql_identifier: circ_eol_quality_grade
+
+    market_demand_value:
+        description: "Market demand for secondary materials"
+        range: string
+        annotations:
+            owl.filler: circ:marketDemand
+            sql_identifier: circ_eol_market_demand
+
+    # Treatment Options slots
+    caloric_value_value:
+        description: "Caloric value for energy recovery (MJ/kg)"
+        range: float
+        annotations:
+            owl.filler: circ:caloricValue
+            sql_identifier: circ_eol_caloric_value
+
+    emission_factors_value:
+        description: "Emission factors from treatment processes"
+        range: string
+        annotations:
+            owl.filler: envo:01000970 # ENVO emission
+            sql_identifier: circ_eol_emission_factors
+
+    landfill_classification_value:
+        description: "Classification of landfill type"
+        range: string
+        annotations:
+            owl.filler: envo:00000533 # ENVO landfill
+            sql_identifier: circ_eol_landfill_classification
+
+    leaching_potential_value:
+        description: "Potential for leaching of hazardous substances"
+        range: string
+        annotations:
+            owl.filler: circ:leachingPotential
+            sql_identifier: circ_eol_leaching_potential
+
+    hazardous_waste_treatment_value:
+        description: "Treatment methods for hazardous waste"
+        range: string
+        annotations:
+            owl.filler: circ:hazardousWasteTreatment
+            sql_identifier: circ_eol_hazardous_treatment
+
+    biological_treatment_value:
+        description: "Biological treatment options (composting, anaerobic digestion)"
+        range: string
+        annotations:
+            owl.filler: circ:biologicalTreatment
+            sql_identifier: circ_eol_biological_treatment
+
+classes:
+    CircularityAndEOL:
+        description: "Root container for circularity and end-of-life information"
+        attributes:
+            design_for_circularity:
+                description: "Design features that enable circular economy principles"
+                range: DesignForCircularity
+            product_performance_factors:
+                description: "Quantifiable factors influencing circular performance"
+                range: ProductPerformanceFactors
+            circularity_assessments:
+                description: "Generic container for circularity assessments"
+                range: CircularityAssessments
+            end_of_life_information:
+                description: "End-of-life pathways and recovery information"
+                range: EndOfLifeInformation
+
+    DesignForCircularity:
+        description: "Design decisions and features that enable circular economy principles"
+        attributes:
+            modular_design:
+                description: "Modularity aspects of the product design"
+                range: ModularDesign
+            material_selection:
+                description: "Material choices supporting circularity"
+                range: MaterialSelection
+            disassembly_features:
+                description: "Features facilitating product disassembly"
+                range: DisassemblyFeatures
+            durability_features:
+                description: "Features enhancing product durability and longevity"
+                range: DurabilityFeatures
+
+    ModularDesign:
+        description: "Product modularity characteristics"
+        attributes:
+            modularity_level:
+                description: "Degree of product modularity"
+                range: string
+            interchangeable_parts:
+                description: "Parts that can be interchanged"
+                range: string
+            standardized_interfaces:
+                description: "Standardized connection interfaces"
+                range: string
+
+    MaterialSelection:
+        description: "Material composition and selection for circularity"
+        attributes:
+            recycled_content:
+                description: "Percentage of recycled content"
+                range: float
+            renewable_content:
+                description: "Percentage of renewable content"
+                range: float
+            hazardous_substances:
+                description: "Hazardous substances present"
+                range: string
+            material_passport:
+                description: "Material passport reference"
+                range: string
+
+    DisassemblyFeatures:
+        description: "Product disassembly characteristics"
+        attributes:
+            disassembly_time:
+                description: "Time required for disassembly"
+                range: float
+            required_tools:
+                description: "Tools needed for disassembly"
+                range: string
+            disassembly_instructions:
+                description: "Disassembly guidance"
+                range: string
+            fastener_types:
+                description: "Types of fasteners used"
+                range: string
+
+    DurabilityFeatures:
+        description: "Product durability and maintenance characteristics"
+        attributes:
+            expected_lifetime:
+                description: "Expected operational lifetime"
+                range: float
+            repairability_index:
+                description: "Repairability score or index"
+                range: string
+            upgrade_capability:
+                description: "Upgrade possibilities"
+                range: string
+            maintenance_schedule:
+                description: "Maintenance requirements"
+                range: string
+
+    ProductPerformanceFactors:
+        description: "Quantifiable factors that influence circular performance"
+        attributes:
+            resource_efficiency:
+                description: "Resource efficiency metrics"
+                range: ResourceEfficiency
+            lifespan_factors:
+                description: "Factors affecting product lifespan"
+                range: LifespanFactors
+            circular_capability:
+                description: "Potential for circular economy strategies"
+                range: CircularCapability
+
+    ResourceEfficiency:
+        description: "Metrics related to resource use efficiency"
+        attributes:
+            material_intensity:
+                description: "Material use per functional unit"
+                range: float
+            energy_efficiency:
+                description: "Energy consumption efficiency"
+                range: float
+            water_footprint:
+                description: "Water consumption footprint"
+                range: float
+            waste_generation:
+                description: "Waste generated during lifecycle"
+                range: float
+
+    LifespanFactors:
+        description: "Factors determining product lifespan and reliability"
+        attributes:
+            mean_time_between_failures:
+                description: "MTBF reliability metric"
+                range: float
+            warranty_period:
+                description: "Warranty duration offered"
+                range: float
+            service_life:
+                description: "Expected service lifetime"
+                range: float
+            obsolescence_factors:
+                description: "Factors leading to obsolescence"
+                range: string
+
+    CircularCapability:
+        description: "Potential for circular economy strategies"
+        attributes:
+            reuse_potential:
+                description: "Potential for direct reuse"
+                range: string
+            refurbishment_potential:
+                description: "Potential for refurbishment"
+                range: string
+            remanufacturing_potential:
+                description: "Potential for remanufacturing"
+                range: string
+            recycling_potential:
+                description: "Potential for material recycling"
+                range: string
+
+    CircularityAssessments:
+        description: "Container for circularity-related assessments of any type"
+        attributes:
+            assessments:
+                description: "Collection of assessments performed"
+                range: Assessment
+                multivalued: true
+
+    Assessment:
+        description: "A single assessment instance with methodology and results"
+        attributes:
+            assessment_type:
+                description: "Type of assessment"
+                range: string
+            assessment_methodology:
+                description: "Methodology used"
+                range: string
+            assessment_date:
+                description: "Date of assessment"
+                range: date
+            assessment_version:
+                description: "Version of methodology"
+                range: string
+            assessment_score:
+                description: "Overall score"
+                range: float
+            score_unit:
+                description: "Unit of score"
+                range: string
+            score_range:
+                description: "Valid score range"
+                range: string
+            sub_scores:
+                description: "Breakdown of score components"
+                range: SubScore
+                multivalued: true
+            data_sources:
+                description: "Data sources used"
+                range: string
+            assessment_reference:
+                description: "External reference"
+                range: string
+            certification_status:
+                description: "Certification status"
+                range: string
+
+    SubScore:
+        description: "Component score within an assessment"
+        attributes:
+            sub_score_name:
+                description: "Name of sub-score"
+                range: string
+            sub_score_value:
+                description: "Value of sub-score"
+                range: float
+            sub_score_weight:
+                description: "Weight in overall score"
+                range: float
+
+    EndOfLifeInformation:
+        description: "Comprehensive end-of-life pathways and material recovery information"
+        attributes:
+            collection_and_sorting:
+                description: "Collection and sorting systems"
+                range: CollectionAndSorting
+            recycling_pathways:
+                description: "Recycling routes and infrastructure"
+                range: RecyclingPathways
+            crm_recovery:
+                description: "Critical raw materials recovery"
+                range: CRMRecovery
+            treatment_options:
+                description: "Final treatment and disposal options"
+                range: TreatmentOptions
+
+    CollectionAndSorting:
+        description: "Waste collection and sorting information"
+        attributes:
+            collection_schemes:
+                description: "Available collection programs"
+                range: string
+            sorting_instructions:
+                description: "Sorting guidance"
+                range: string
+            waste_classification:
+                description: "Waste classification codes"
+                range: string
+            take_back_programs:
+                description: "Take-back program details"
+                range: string
+
+    RecyclingPathways:
+        description: "Material recycling pathways and infrastructure"
+        attributes:
+            recyclable_materials:
+                description: "Materials that can be recycled"
+                range: RecyclableMaterials
+                multivalued: true
+            non_recyclable_materials:
+                description: "Materials that cannot be recycled"
+                range: NonRecyclableMaterials
+                multivalued: true
+            recycling_infrastructure:
+                description: "Required recycling infrastructure"
+                range: RecyclingInfrastructure
+
+    RecyclableMaterials:
+        description: "Information about recyclable materials"
+        attributes:
+            material_type:
+                description: "Type of recyclable material"
+                range: string
+            recycling_rate:
+                description: "Recycling rate percentage"
+                range: float
+            recycling_process:
+                description: "Required recycling process"
+                range: string
+
+    NonRecyclableMaterials:
+        description: "Information about non-recyclable materials"
+        attributes:
+            material_type:
+                description: "Type of non-recyclable material"
+                range: string
+            percentage:
+                description: "Percentage of total"
+                range: float
+            disposal_method:
+                description: "Disposal method required"
+                range: string
+
+    RecyclingInfrastructure:
+        description: "Infrastructure requirements for recycling"
+        attributes:
+            required_technology:
+                description: "Technology needed"
+                range: string
+            geographic_availability:
+                description: "Geographic coverage"
+                range: string
+
+    CRMRecovery:
+        description: "Critical raw materials recovery information"
+        attributes:
+            critical_materials_list:
+                description: "List of critical materials"
+                range: CriticalMaterial
+                multivalued: true
+            recovery_methods:
+                description: "Methods for recovery"
+                range: RecoveryMethods
+            secondary_raw_materials:
+                description: "Secondary materials produced"
+                range: SecondaryRawMaterials
+
+    CriticalMaterial:
+        description: "Information about a critical raw material"
+        attributes:
+            material_name:
+                description: "Name of critical material"
+                range: string
+            quantity:
+                description: "Quantity present"
+                range: float
+            concentration:
+                description: "Concentration percentage"
+                range: float
+
+    RecoveryMethods:
+        description: "Methods for recovering critical materials"
+        attributes:
+            extraction_process:
+                description: "Extraction process description"
+                range: string
+            recovery_rate:
+                description: "Recovery rate percentage"
+                range: float
+            economic_viability:
+                description: "Economic viability assessment"
+                range: string
+
+    SecondaryRawMaterials:
+        description: "Secondary materials from recovery"
+        attributes:
+            quality_grade:
+                description: "Quality grade of materials"
+                range: string
+            market_demand:
+                description: "Market demand assessment"
+                range: string
+
+    TreatmentOptions:
+        description: "Final treatment and disposal options"
+        attributes:
+            energy_recovery:
+                description: "Energy recovery potential"
+                range: EnergyRecovery
+            landfilling:
+                description: "Landfilling information"
+                range: Landfilling
+            special_treatment:
+                description: "Special treatment requirements"
+                range: SpecialTreatment
+
+    EnergyRecovery:
+        description: "Energy recovery from waste"
+        attributes:
+            caloric_value:
+                description: "Caloric value (MJ/kg)"
+                range: float
+            emission_factors:
+                description: "Emission factors"
+                range: string
+
+    Landfilling:
+        description: "Landfill disposal information"
+        attributes:
+            landfill_classification:
+                description: "Type of landfill"
+                range: string
+            leaching_potential:
+                description: "Leaching risk assessment"
+                range: string
+
+    SpecialTreatment:
+        description: "Special treatment requirements"
+        attributes:
+            hazardous_waste_treatment:
+                description: "Hazardous waste treatment"
+                range: string
+            biological_treatment:
+                description: "Biological treatment options"
+                range: string
