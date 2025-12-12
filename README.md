@@ -59,21 +59,22 @@ CircularityAndEOL (root)
 │       ├── RefurbishmentPotential
 │       ├── RemanufacturingPotential
 │       └── RecyclingPotential
-├── 3. ProductPerformanceScores
-│   ├── CircularityScore
-│   │   ├── OverallScore (0-100)
-│   │   ├── ScoringMethodology
-│   │   ├── BenchmarkComparison
-│   │   └── ImprovementPotential
-│   ├── EnvironmentalScores
-│   │   ├── CarbonFootprintScore
-│   │   ├── ResourceDepletionScore
-│   │   ├── EcotoxicityScore
-│   │   └── BiodiversityImpactScore
-│   └── SocialScores
-│       ├── RepairAccessibilityScore
-│       ├── LocalValueRetentionScore
-│       └── JobCreationPotentialScore
+├── 3. CircularityAssessments
+│   └── Assessment (repeatable)
+│       ├── AssessmentType
+│       ├── AssessmentMethodology
+│       ├── AssessmentDate
+│       ├── AssessmentVersion
+│       ├── AssessmentScore
+│       ├── ScoreUnit
+│       ├── ScoreRange
+│       ├── SubScores (repeatable)
+│       │   ├── SubScoreName
+│       │   ├── SubScoreValue
+│       │   └── SubScoreWeight
+│       ├── DataSources
+│       ├── AssessmentReference
+│       └── CertificationStatus
 └── 4. EndOfLifeInformation
     ├── CollectionAndSorting
     │   ├── CollectionSchemes
@@ -131,11 +132,13 @@ Quantifiable factors that influence circular performance:
 - **LifespanFactors**: MTBF, warranty, service life, obsolescence planning
 - **CircularCapability**: Potential for reuse, refurbishment, remanufacturing, recycling
 
-#### **Step 3: ProductPerformanceScores**
-Aggregated scoring metrics for circularity assessment:
-- **CircularityScore**: Overall 0-100 score with methodology and benchmarks
-- **EnvironmentalScores**: Carbon, resource depletion, ecotoxicity impacts
-- **SocialScores**: Repair accessibility, local value retention, job creation
+#### **Step 3: CircularityAssessments**
+Generic container for any type of circularity-related assessment:
+- **Assessment**: Repeatable structure that can store any assessment methodology
+- **AssessmentType**: Identifier for the type of assessment performed
+- **AssessmentMethodology**: Reference to the methodology used
+- **SubScores**: Optional breakdown of the main score into components
+- Supports multiple assessments of different types over time
 
 #### **Step 4: EndOfLifeInformation**
 Comprehensive end-of-life pathways and material recovery:
@@ -164,7 +167,8 @@ Every data point in the model includes a `sql_identifier` annotation that serves
 **Examples:**
 - `circ_design_modularity_level` - Modularity level in Design for Circularity
 - `circ_perf_recycling_potential` - Recycling potential in Performance Factors
-- `circ_score_overall_circularity` - Overall circularity score
+- `circ_assessment_type` - Type of assessment performed
+- `circ_assessment_score` - Assessment score value
 - `circ_eol_crm_recovery_rate` - Critical material recovery rate
 - `circ_eol_recycling_rate` - Material recycling rate
 
@@ -178,7 +182,7 @@ This identifier system enables seamless integration with databases and ensures c
 |------|-----------|-------------------------|----------------------|--------|--------------|
 | **1** | **DesignForCircularity** | • Lack of standardized modularity metrics<br>• Material passport integration<br>• Disassembly time estimation methods<br>• Repairability index standards | • Modular design classification system<br>• Material selection criteria<br>• Disassembly instruction templates<br>• Durability metrics framework | **PLANNED** | • Integration with material databases<br>• Automated disassembly time calculation<br>• Repairability score harmonization |
 | **2** | **ProductPerformanceFactors** | • Resource efficiency measurement<br>• Lifespan prediction accuracy<br>• Circular capability assessment<br>• Data collection challenges | • Resource efficiency indicators<br>• Lifespan factor definitions<br>• Circular capability matrix<br>• Performance benchmarks | **PLANNED** | • Real-time performance monitoring<br>• Predictive obsolescence models<br>• Industry-specific benchmarks |
-| **3** | **ProductPerformanceScores** | • Scoring methodology transparency<br>• Benchmark selection<br>• Score aggregation methods<br>• Comparability across products | • 0-100 scoring scale<br>• Multi-criteria assessment<br>• Weighted scoring system<br>• Improvement tracking | **PLANNED** | • Dynamic scoring algorithms<br>• Peer comparison tools<br>• Score certification process |
+| **3** | **CircularityAssessments** | • Multiple assessment methodologies<br>• Score comparability<br>• Version control<br>• Generic storage structure | • Generic assessment container<br>• Support for any methodology<br>• Repeatable assessments<br>• Sub-score breakdown capability | **PLANNED** | • Assessment validation<br>• Historical tracking<br>• Interoperability standards |
 | **4** | **EndOfLifeInformation** | • Collection scheme variety<br>• Recycling rate accuracy<br>• CRM identification and tracking<br>• Treatment option optimization | • Collection pathway mapping<br>• Material-specific recycling rates<br>• CRM recovery framework<br>• Treatment hierarchy | **PLANNED** | • Real-time recycling infrastructure data<br>• CRM market price integration<br>• Automated waste classification |
 
 ### Integration Opportunities
