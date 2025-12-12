@@ -1,7 +1,7 @@
 cff-version: 1.2.0
-title: Project template for data models developed within the CE-RISE Horizon Europe project
+title: CE-RISE Circularity and End-of-Life Data Model
 message: >-
-  v0.0.1 - Initial sketch of project template.
+  v0.0.1 - Initial implementation of the Circularity and End-of-Life data model with comprehensive 4-stage structure for design-for-circularity, performance factors, assessments, and end-of-life pathways.
 type: software
 doi: xxx_to_be_obtained_xxx
 authors:
@@ -14,12 +14,21 @@ identifiers:
   - type: doi
     value: xxx_to_be_obtained_xxx
     description: This DOI represents all software versions.
-repository-code: 'https://codeberg.org/CE-RISE_models/template-data-model'
-url: 'https://ce-rise-models.codeberg.page/template-data-model/'
+repository-code: 'https://codeberg.org/CE-RISE_models/circularity-and-eol'
+url: 'https://ce-rise-models.codeberg.page/circularity-and-eol/'
 abstract: >-
-  Project template for data models developed within the CE-RISE Horizon Europe project.
+  Data model capturing circularity and end-of-life information for products, including design-for-circularity attributes, performance factors and scores, and end-of-life pathways such as disassembly, recycling, treatment options, and CRM recovery-related information. The model provides an autonomous framework with generic assessment storage supporting multiple methodologies while maintaining interoperability potential.
 keywords:
   - CE-RISE
+  - Circularity
+  - End-of-Life
+  - Circular Economy
+  - Design for Circularity
+  - Recycling
+  - Critical Raw Materials
+  - CRM Recovery
+  - Product Performance
+  - Sustainability Assessment
   - Data Model
   - Ontology
   - Open Source
