@@ -1,0 +1,2015 @@
+WARNING:linkml.generators.owlgen:Ambiguous attribute: material_type https://ce-rise-models.codeberg.page/circularity-and-eol/material_type
+WARNING:linkml.generators.owlgen:Ambiguous attribute: material_type https://ce-rise-models.codeberg.page/circularity-and-eol/material_type
+@prefix circ: <https://ce-rise-models.codeberg.page/circularity-and-eol/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://ce-rise-models.codeberg.page/circularity-and-eol/.owl.ttl> a owl:Ontology ;
+    rdfs:label "circularity-and-eol" ;
+    dcterms:license "CC BY-NC 4.0" ;
+    dcterms:title "CE-RISE Circularity and End-of-Life Data Model" ;
+    pav:version "0.0.1" ;
+    skos:definition """Data model capturing circularity and end-of-life information for products, including design-for-circularity attributes, performance factors and scores, and end-of-life pathways such as disassembly, recycling, treatment options, and CRM recovery-related information.
+""" .
+
+circ:CircularityAndEOL a owl:Class ;
+    rdfs:label "CircularityAndEOL" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:circularity_assessments ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:DesignForCircularity ;
+            owl:onProperty circ:design_for_circularity ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:design_for_circularity ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:EndOfLifeInformation ;
+            owl:onProperty circ:end_of_life_information ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:circularity_assessments ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:CircularityAssessments ;
+            owl:onProperty circ:circularity_assessments ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:product_performance_factors ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:end_of_life_information ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:end_of_life_information ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:design_for_circularity ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:ProductPerformanceFactors ;
+            owl:onProperty circ:product_performance_factors ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:product_performance_factors ] ;
+    skos:definition "Root container for circularity and end-of-life information" ;
+    skos:inScheme circ: ;
+    circ:references "ESPR; CIRPASS; Battery Pass; King et al.; Jensen et al.; Berger et al.; Koppelaar et al.; Cruz et al.; Christensen et al." .
+
+circ:assessment_date_value a owl:DatatypeProperty ;
+    rdfs:label "assessment_date_value" ;
+    rdfs:range xsd:date ;
+    skos:definition "Date when assessment was performed" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "dcterms:date" ;
+    circ:sql_identifier "circ_assessment_date" .
+
+circ:assessment_methodology_value a owl:DatatypeProperty ;
+    rdfs:label "assessment_methodology_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Methodology or framework used for assessment" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "dcterms:methodUsed" ;
+    circ:sql_identifier "circ_assessment_methodology" .
+
+circ:assessment_reference_value a owl:DatatypeProperty ;
+    rdfs:label "assessment_reference_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "External reference or URI to full assessment details" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "dcterms:references" ;
+    circ:sql_identifier "circ_assessment_reference" .
+
+circ:assessment_score_value a owl:DatatypeProperty ;
+    rdfs:label "assessment_score_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Overall assessment score or result" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:assessmentScore" ;
+    circ:sql_identifier "circ_assessment_score" .
+
+circ:assessment_type_value a owl:DatatypeProperty ;
+    rdfs:label "assessment_type_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Type or category of assessment performed" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "dcterms:type" ;
+    circ:sql_identifier "circ_assessment_type" .
+
+circ:assessment_version_value a owl:DatatypeProperty ;
+    rdfs:label "assessment_version_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Version of the assessment methodology used" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "dcterms:hasVersion" ;
+    circ:sql_identifier "circ_assessment_version" .
+
+circ:biological_treatment_value a owl:DatatypeProperty ;
+    rdfs:label "biological_treatment_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Biological treatment options (composting, anaerobic digestion)" ;
+    skos:inScheme circ: ;
+    circ:comment "Compostability options" ;
+    circ:owl.filler "circ:biologicalTreatment" ;
+    circ:references "King et al." ;
+    circ:sql_identifier "circ_eol_biological_treatment" .
+
+circ:caloric_value_value a owl:DatatypeProperty ;
+    rdfs:label "caloric_value_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Caloric value for energy recovery (MJ/kg)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:caloricValue" ;
+    circ:sql_identifier "circ_eol_caloric_value" .
+
+circ:certification_status_value a owl:DatatypeProperty ;
+    rdfs:label "certification_status_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Certification or verification status of the assessment" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:certificationStatus" ;
+    circ:references "ESPR; Battery Pass; CIRPASS" ;
+    circ:sql_identifier "circ_assessment_certification" .
+
+circ:collection_schemes_value a owl:DatatypeProperty ;
+    rdfs:label "collection_schemes_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Available collection schemes and programs" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:collectionSchemes" ;
+    circ:references "ESPR Art 7 (2) b) ii); Battery Pass; Jensen et al." ;
+    circ:sql_identifier "circ_eol_collection_schemes" .
+
+circ:critical_material_name_value a owl:DatatypeProperty ;
+    rdfs:label "critical_material_name_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Name of critical raw material" ;
+    skos:inScheme circ: ;
+    circ:comment "Material type includes CRMs" ;
+    circ:owl.filler "circ:criticalMaterialName" ;
+    circ:references "Koppelaar et al.; Berger et al.; Battery Pass" ;
+    circ:sql_identifier "circ_eol_crm_material_name" .
+
+circ:crm_concentration_value a owl:DatatypeProperty ;
+    rdfs:label "crm_concentration_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Concentration of critical material (percentage)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:concentration" ;
+    circ:references "ESPR Art 7 5. c); Battery Pass; CIRPASS; CE-RISE Deliverable 1.1; CLP Regulation (EC) No 1272/2008" ;
+    circ:sql_identifier "circ_eol_crm_concentration" .
+
+circ:crm_quantity_value a owl:DatatypeProperty ;
+    rdfs:label "crm_quantity_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Quantity of critical material (in grams or kilograms)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "qudt:quantity" ;
+    circ:references "Koppelaar et al." ;
+    circ:sql_identifier "circ_eol_crm_quantity" .
+
+circ:crm_recovery_rate_value a owl:DatatypeProperty ;
+    rdfs:label "crm_recovery_rate_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Recovery rate for critical materials (percentage)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:recoveryRate" ;
+    circ:references "Koppelaar et al." ;
+    circ:sql_identifier "circ_eol_crm_recovery_rate" .
+
+circ:data_sources_value a owl:DatatypeProperty ;
+    rdfs:label "data_sources_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Sources of data used for the assessment" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "dcterms:source" ;
+    circ:sql_identifier "circ_assessment_data_sources" .
+
+circ:disassembly_instructions_value a owl:DatatypeProperty ;
+    rdfs:label "disassembly_instructions_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Reference to disassembly instructions or inline instructions" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "schema:instructions" ;
+    circ:references "ESPR Art 7 (2) b) iii); King et al.; Jensen et al.; CE-RISE Deliverable 1.1; Wan and Jiang" ;
+    circ:sql_identifier "circ_design_disassembly_instructions" .
+
+circ:disassembly_time_value a owl:DatatypeProperty ;
+    rdfs:label "disassembly_time_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Estimated time required for complete disassembly (in minutes)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:disassemblyTime" ;
+    circ:references "King et al.; ESPR Annex I" ;
+    circ:sql_identifier "circ_design_disassembly_time" .
+
+circ:disposal_method_value a owl:DatatypeProperty ;
+    rdfs:label "disposal_method_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Method for disposal of non-recyclable materials" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:disposalMethod" ;
+    circ:references "ESPR Art 7 (2) b) iii); CE-RISE Deliverable 1.1; Christensen et al." ;
+    circ:sql_identifier "circ_eol_disposal_method" .
+
+circ:economic_viability_value a owl:DatatypeProperty ;
+    rdfs:label "economic_viability_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Economic viability assessment of CRM recovery" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:economicViability" ;
+    circ:references "Koppelaar et al." ;
+    circ:sql_identifier "circ_eol_economic_viability" .
+
+circ:emission_factors_value a owl:DatatypeProperty ;
+    rdfs:label "emission_factors_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Emission factors from treatment processes" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "envo:01000970" ;
+    circ:sql_identifier "circ_eol_emission_factors" .
+
+circ:energy_efficiency_value a owl:DatatypeProperty ;
+    rdfs:label "energy_efficiency_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Energy efficiency rating or consumption (kWh/unit)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "qudt:energyEfficiency" ;
+    circ:references "King et al.; Energy Labelling Directive" ;
+    circ:sql_identifier "circ_perf_energy_efficiency" .
+
+circ:expected_lifetime_value a owl:DatatypeProperty ;
+    rdfs:label "expected_lifetime_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Expected product lifetime under normal use conditions (in years)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "schema:expectedLifetime" ;
+    circ:references "ESPR; CE-RISE Deliverable 1.1" ;
+    circ:sql_identifier "circ_design_expected_lifetime" .
+
+circ:extraction_process_value a owl:DatatypeProperty ;
+    rdfs:label "extraction_process_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Process for extracting critical materials" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:extractionProcess" ;
+    circ:references "Koppelaar et al." ;
+    circ:sql_identifier "circ_eol_extraction_process" .
+
+circ:fastener_types_value a owl:DatatypeProperty ;
+    rdfs:label "fastener_types_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Types of fasteners used in product assembly" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:fastenerTypes" ;
+    circ:sql_identifier "circ_design_fastener_types" .
+
+circ:geographic_availability_value a owl:DatatypeProperty ;
+    rdfs:label "geographic_availability_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Geographic availability of recycling infrastructure" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "schema:areaServed" ;
+    circ:sql_identifier "circ_eol_geographic_availability" .
+
+circ:hazardous_substances_value a owl:DatatypeProperty ;
+    rdfs:label "hazardous_substances_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "List of hazardous substances present in the product" ;
+    skos:inScheme circ: ;
+    circ:comment "Name of substances of concern as per REACH, RoHS regulations; concentration threshold 0.1% weight by weight (SCIP database requirement)" ;
+    circ:owl.filler "chebi:78298" ;
+    circ:references "ESPR Art 7 5. a); Battery Pass; CIRPASS; King et al.; CE-RISE Deliverable 1.1; CLP Regulation (EC) No 1272/2008" ;
+    circ:sql_identifier "circ_design_hazardous_substances" .
+
+circ:hazardous_waste_treatment_value a owl:DatatypeProperty ;
+    rdfs:label "hazardous_waste_treatment_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Treatment methods for hazardous waste" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:hazardousWasteTreatment" ;
+    circ:references "ESPR Art 7 5. d); REACH Regulation (EC) No 1907/2006; RoHS Directive 2011/65/EU; King et al." ;
+    circ:sql_identifier "circ_eol_hazardous_treatment" .
+
+circ:interchangeable_parts_value a owl:DatatypeProperty ;
+    rdfs:label "interchangeable_parts_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "List of parts that can be interchanged with standard components" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:hasInterchangeableParts" ;
+    circ:sql_identifier "circ_design_interchangeable_parts" .
+
+circ:landfill_classification_value a owl:DatatypeProperty ;
+    rdfs:label "landfill_classification_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Classification of landfill type" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "envo:00000533" ;
+    circ:sql_identifier "circ_eol_landfill_classification" .
+
+circ:leaching_potential_value a owl:DatatypeProperty ;
+    rdfs:label "leaching_potential_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Potential for leaching of hazardous substances" ;
+    skos:inScheme circ: ;
+    circ:comment "Location of substances of concern within the product; reporting required for substances above 0.1% w/w" ;
+    circ:owl.filler "circ:leachingPotential" ;
+    circ:references "ESPR Art 7 5. b); Battery Pass; CIRPASS; SCIP database" ;
+    circ:sql_identifier "circ_eol_leaching_potential" .
+
+circ:maintenance_schedule_value a owl:DatatypeProperty ;
+    rdfs:label "maintenance_schedule_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Recommended maintenance schedule and intervals" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "schema:maintenanceSchedule" ;
+    circ:references "ESPR; CIRPASS; King et al.; Jensen et al.; CE-RISE Deliverable 1.1; Wan and Jiang" ;
+    circ:sql_identifier "circ_design_maintenance_schedule" .
+
+circ:market_demand_value a owl:DatatypeProperty ;
+    rdfs:label "market_demand_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Market demand for secondary materials" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:marketDemand" ;
+    circ:references "Koppelaar et al.; CE-RISE Deliverable 1.1" ;
+    circ:sql_identifier "circ_eol_market_demand" .
+
+circ:material_intensity_value a owl:DatatypeProperty ;
+    rdfs:label "material_intensity_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Material intensity per functional unit (kg/unit)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "qudt:materialIntensity" ;
+    circ:references "Berger et al.; King et al." ;
+    circ:sql_identifier "circ_perf_material_intensity" .
+
+circ:material_passport_value a owl:DatatypeProperty ;
+    rdfs:label "material_passport_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Reference or link to material passport documentation" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:hasMaterialPassport" ;
+    circ:references "CIRPASS; Battery Pass" ;
+    circ:sql_identifier "circ_design_material_passport" .
+
+circ:material_type_non_recyclable_value a owl:DatatypeProperty ;
+    rdfs:label "material_type_non_recyclable_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Type of non-recyclable material" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "chebi:24431" ;
+    circ:references "King et al.; CE-RISE Deliverable 1.1" ;
+    circ:sql_identifier "circ_eol_non_recyclable_material_type" .
+
+circ:material_type_recyclable_value a owl:DatatypeProperty ;
+    rdfs:label "material_type_recyclable_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Type of recyclable material" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "chebi:24431" ;
+    circ:sql_identifier "circ_eol_recyclable_material_type" .
+
+circ:mean_time_between_failures_value a owl:DatatypeProperty ;
+    rdfs:label "mean_time_between_failures_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Mean time between failures (MTBF) in hours" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "bfo:0000038" ;
+    circ:sql_identifier "circ_perf_mtbf" .
+
+circ:modularity_level_value a owl:DatatypeProperty ;
+    rdfs:label "modularity_level_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Level of modularity in product design (e.g., fully modular, partially modular, integrated)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "odp:hasModularityLevel" ;
+    circ:sql_identifier "circ_design_modularity_level" .
+
+circ:non_recyclable_percentage_value a owl:DatatypeProperty ;
+    rdfs:label "non_recyclable_percentage_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Percentage of non-recyclable materials" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:nonRecyclablePercentage" ;
+    circ:sql_identifier "circ_eol_non_recyclable_percentage" .
+
+circ:obsolescence_factors_value a owl:DatatypeProperty ;
+    rdfs:label "obsolescence_factors_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Factors contributing to product obsolescence" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:obsolescenceFactors" ;
+    circ:sql_identifier "circ_perf_obsolescence_factors" .
+
+circ:quality_grade_value a owl:DatatypeProperty ;
+    rdfs:label "quality_grade_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Quality grade of secondary raw materials" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:qualityGrade" ;
+    circ:references "Koppelaar et al." ;
+    circ:sql_identifier "circ_eol_quality_grade" .
+
+circ:recycled_content_value a owl:DatatypeProperty ;
+    rdfs:label "recycled_content_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Percentage of recycled materials in the product" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:recycledContentPercentage" ;
+    circ:references "ESPR Annex I; CIRPASS; Battery Pass; King et al.; Jensen et al.; CE-RISE Deliverable 1.1" ;
+    circ:sql_identifier "circ_design_recycled_content" .
+
+circ:recycling_potential_value a owl:DatatypeProperty ;
+    rdfs:label "recycling_potential_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Potential for material recycling (qualitative or percentage)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:recyclingPotential" ;
+    circ:references "King et al.; CE-RISE Deliverable 1.1; Cruz et al." ;
+    circ:sql_identifier "circ_perf_recycling_potential" .
+
+circ:recycling_process_value a owl:DatatypeProperty ;
+    rdfs:label "recycling_process_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Description of recycling process required" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:recyclingProcess" ;
+    circ:sql_identifier "circ_eol_recycling_process" .
+
+circ:recycling_rate_value a owl:DatatypeProperty ;
+    rdfs:label "recycling_rate_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Percentage of material that can be recycled" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:recyclingRate" ;
+    circ:sql_identifier "circ_eol_recycling_rate" .
+
+circ:refurbishment_potential_value a owl:DatatypeProperty ;
+    rdfs:label "refurbishment_potential_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Potential for product refurbishment (qualitative or percentage)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:refurbishmentPotential" ;
+    circ:references "King et al.; CE-RISE Deliverable 1.1" ;
+    circ:sql_identifier "circ_perf_refurbish_potential" .
+
+circ:remanufacturing_potential_value a owl:DatatypeProperty ;
+    rdfs:label "remanufacturing_potential_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Potential for product remanufacturing (qualitative or percentage)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:remanufacturingPotential" ;
+    circ:references "King et al.; CE-RISE Deliverable 1.1" ;
+    circ:sql_identifier "circ_perf_remanufacture_potential" .
+
+circ:renewable_content_value a owl:DatatypeProperty ;
+    rdfs:label "renewable_content_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Percentage of renewable materials in the product" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:renewableContentPercentage" ;
+    circ:references "Battery Pass; CIRPASS; King et al." ;
+    circ:sql_identifier "circ_design_renewable_content" .
+
+circ:repairability_index_value a owl:DatatypeProperty ;
+    rdfs:label "repairability_index_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Repairability index score or classification" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:repairabilityIndex" ;
+    circ:references "King et al.; CE-RISE Deliverable 1.1" ;
+    circ:sql_identifier "circ_design_repairability_index" .
+
+circ:required_technology_value a owl:DatatypeProperty ;
+    rdfs:label "required_technology_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Technology required for recycling" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:requiredTechnology" ;
+    circ:sql_identifier "circ_eol_required_technology" .
+
+circ:required_tools_value a owl:DatatypeProperty ;
+    rdfs:label "required_tools_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "List of tools required for disassembly" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:requiredDisassemblyTools" ;
+    circ:sql_identifier "circ_design_required_tools" .
+
+circ:reuse_potential_value a owl:DatatypeProperty ;
+    rdfs:label "reuse_potential_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Potential for product or component reuse (qualitative or percentage)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:reusePotential" ;
+    circ:references "King et al.; CE-RISE Deliverable 1.1" ;
+    circ:sql_identifier "circ_perf_reuse_potential" .
+
+circ:score_range_value a owl:DatatypeProperty ;
+    rdfs:label "score_range_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Valid range for the assessment score (e.g., 0-100, A-F)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:scoreRange" ;
+    circ:sql_identifier "circ_assessment_score_range" .
+
+circ:score_unit_value a owl:DatatypeProperty ;
+    rdfs:label "score_unit_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Unit of measurement for the assessment score" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "qudt:unit" ;
+    circ:sql_identifier "circ_assessment_score_unit" .
+
+circ:service_life_value a owl:DatatypeProperty ;
+    rdfs:label "service_life_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Expected service life under normal conditions (in years)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "schema:serviceLife" ;
+    circ:sql_identifier "circ_perf_service_life" .
+
+circ:sorting_instructions_value a owl:DatatypeProperty ;
+    rdfs:label "sorting_instructions_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Instructions for waste sorting and separation" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "schema:instructions" ;
+    circ:references "Jensen et al." ;
+    circ:sql_identifier "circ_eol_sorting_instructions" .
+
+circ:standardized_interfaces_value a owl:DatatypeProperty ;
+    rdfs:label "standardized_interfaces_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Description of standardized interfaces used in the product" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "bs:74348" ;
+    circ:sql_identifier "circ_design_standard_interfaces" .
+
+circ:sub_score_name_value a owl:DatatypeProperty ;
+    rdfs:label "sub_score_name_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Name or identifier of a sub-score component" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "rdfs:label" ;
+    circ:sql_identifier "circ_assessment_sub_score_name" .
+
+circ:sub_score_value_value a owl:DatatypeProperty ;
+    rdfs:label "sub_score_value_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Value of the sub-score component" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:subScoreValue" ;
+    circ:sql_identifier "circ_assessment_sub_score_value" .
+
+circ:sub_score_weight_value a owl:DatatypeProperty ;
+    rdfs:label "sub_score_weight_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Weight or importance of the sub-score in overall calculation" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:subScoreWeight" ;
+    circ:sql_identifier "circ_assessment_sub_score_weight" .
+
+circ:take_back_programs_value a owl:DatatypeProperty ;
+    rdfs:label "take_back_programs_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Manufacturer or retailer take-back program details" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:takeBackProgram" ;
+    circ:references "ESPR Art 7 (2) b) ii); CIRPASS; King et al.; Battery Pass; CE-RISE Deliverable 1.1; Christensen et al." ;
+    circ:sql_identifier "circ_eol_take_back_programs" .
+
+circ:upgrade_capability_value a owl:DatatypeProperty ;
+    rdfs:label "upgrade_capability_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Description of upgrade possibilities and modular improvements" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:upgradeCapability" ;
+    circ:references "ESPR Art. 1 5.; ESPR Annex I; CE-RISE Deliverable 1.1" ;
+    circ:sql_identifier "circ_design_upgrade_capability" .
+
+circ:warranty_period_value a owl:DatatypeProperty ;
+    rdfs:label "warranty_period_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Warranty period offered (in years)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "schema:warrantyPeriod" ;
+    circ:references "ESPR; CIRPASS" ;
+    circ:sql_identifier "circ_perf_warranty_period" .
+
+circ:waste_classification_value a owl:DatatypeProperty ;
+    rdfs:label "waste_classification_value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Waste classification codes and categories" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "envo:00002001" ;
+    circ:references "ESPR; Battery Pass" ;
+    circ:sql_identifier "circ_eol_waste_classification" .
+
+circ:waste_generation_value a owl:DatatypeProperty ;
+    rdfs:label "waste_generation_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Waste generated during product lifecycle (kg)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "circ:wasteGeneration" ;
+    circ:references "King et al." ;
+    circ:sql_identifier "circ_perf_waste_generation" .
+
+circ:water_footprint_value a owl:DatatypeProperty ;
+    rdfs:label "water_footprint_value" ;
+    rdfs:range xsd:float ;
+    skos:definition "Water consumption per functional unit (liters/unit)" ;
+    skos:inScheme circ: ;
+    circ:owl.filler "envo:01001026" ;
+    circ:references "King et al.; CE-RISE Deliverable 1.1" ;
+    circ:sql_identifier "circ_perf_water_footprint" .
+
+circ:Assessment a owl:Class ;
+    rdfs:label "Assessment" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:assessment_methodology ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:assessment_score ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:assessment_score ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:assessment_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:score_range ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:certification_status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:SubScore ;
+            owl:onProperty circ:sub_scores ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:assessment_methodology ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:assessment_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:assessment_methodology ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:assessment_reference ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:assessment_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:data_sources ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:assessment_score ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:sub_scores ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:certification_status ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:score_unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty circ:assessment_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:assessment_reference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:certification_status ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:assessment_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:score_unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:assessment_version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:assessment_reference ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:data_sources ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:data_sources ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:score_range ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:assessment_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:score_unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:score_range ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:assessment_version ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:assessment_version ] ;
+    skos:definition "A single assessment instance with methodology and results" ;
+    skos:inScheme circ: ;
+    circ:references "Berger et al.; King et al.; Battery Pass" .
+
+circ:CRMRecovery a owl:Class ;
+    rdfs:label "CRMRecovery" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom circ:SecondaryRawMaterials ;
+            owl:onProperty circ:secondary_raw_materials ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:recovery_methods ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:secondary_raw_materials ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:secondary_raw_materials ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:CriticalMaterial ;
+            owl:onProperty circ:critical_materials_list ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:recovery_methods ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:RecoveryMethods ;
+            owl:onProperty circ:recovery_methods ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:critical_materials_list ] ;
+    skos:definition "Critical raw materials recovery information" ;
+    skos:inScheme circ: ;
+    circ:comment "Critical Raw Materials recovery and treatment" ;
+    circ:references "Koppelaar et al.; Battery Pass" .
+
+circ:CircularCapability a owl:Class ;
+    rdfs:label "CircularCapability" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:refurbishment_potential ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:remanufacturing_potential ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:refurbishment_potential ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:remanufacturing_potential ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:recycling_potential ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:recycling_potential ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:remanufacturing_potential ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:refurbishment_potential ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:reuse_potential ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:reuse_potential ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:recycling_potential ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:reuse_potential ] ;
+    skos:definition "Potential for circular economy strategies" ;
+    skos:inScheme circ: ;
+    circ:references "King et al.; CE-RISE Deliverable 1.1" .
+
+circ:CircularityAssessments a owl:Class ;
+    rdfs:label "CircularityAssessments" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom circ:Assessment ;
+            owl:onProperty circ:assessments ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:assessments ] ;
+    skos:definition "Container for circularity-related assessments of any type" ;
+    skos:inScheme circ: ;
+    circ:references "King et al.; Berger et al.; CIRPASS" .
+
+circ:CollectionAndSorting a owl:Class ;
+    rdfs:label "CollectionAndSorting" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:take_back_programs ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:collection_schemes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:collection_schemes ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:collection_schemes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:take_back_programs ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:waste_classification ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:take_back_programs ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:waste_classification ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:sorting_instructions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:waste_classification ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:sorting_instructions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:sorting_instructions ] ;
+    skos:definition "Waste collection and sorting information" ;
+    skos:inScheme circ: ;
+    circ:references "Jensen et al.; ESPR Art 7 (2) b) ii)" .
+
+circ:CriticalMaterial a owl:Class ;
+    rdfs:label "CriticalMaterial" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:concentration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:material_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:concentration ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:concentration ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:material_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:quantity ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:material_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:quantity ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:quantity ] ;
+    skos:definition "Information about a critical raw material" ;
+    skos:inScheme circ: ;
+    circ:references "Koppelaar et al.; Berger et al.; Battery Pass" .
+
+circ:DesignForCircularity a owl:Class ;
+    rdfs:label "DesignForCircularity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom circ:DurabilityFeatures ;
+            owl:onProperty circ:durability_features ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:material_selection ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:DisassemblyFeatures ;
+            owl:onProperty circ:disassembly_features ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:disassembly_features ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:durability_features ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:ModularDesign ;
+            owl:onProperty circ:modular_design ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:durability_features ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:disassembly_features ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:material_selection ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:modular_design ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:MaterialSelection ;
+            owl:onProperty circ:material_selection ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:modular_design ] ;
+    skos:definition "Design decisions and features that enable circular economy principles" ;
+    skos:inScheme circ: ;
+    circ:references "ESPR Annex I; CIRPASS; Battery Pass" .
+
+circ:DisassemblyFeatures a owl:Class ;
+    rdfs:label "DisassemblyFeatures" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:disassembly_instructions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:disassembly_time ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:disassembly_instructions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:fastener_types ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:disassembly_time ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:required_tools ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:disassembly_time ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:fastener_types ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:fastener_types ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:disassembly_instructions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:required_tools ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:required_tools ] ;
+    skos:definition "Product disassembly characteristics" ;
+    skos:inScheme circ: ;
+    circ:comment "Information relevant for disassembly" ;
+    circ:references "ESPR Art 7 5. e); King et al." .
+
+circ:DurabilityFeatures a owl:Class ;
+    rdfs:label "DurabilityFeatures" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:upgrade_capability ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:maintenance_schedule ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:upgrade_capability ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:maintenance_schedule ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:upgrade_capability ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:repairability_index ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:repairability_index ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:repairability_index ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:expected_lifetime ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:expected_lifetime ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:maintenance_schedule ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:expected_lifetime ] ;
+    skos:definition "Product durability and maintenance characteristics" ;
+    skos:inScheme circ: ;
+    circ:references "ESPR Art. 1 5.; ESPR Annex I; King et al." .
+
+circ:EndOfLifeInformation a owl:Class ;
+    rdfs:label "EndOfLifeInformation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:crm_recovery ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:collection_and_sorting ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:TreatmentOptions ;
+            owl:onProperty circ:treatment_options ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:crm_recovery ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:CRMRecovery ;
+            owl:onProperty circ:crm_recovery ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:CollectionAndSorting ;
+            owl:onProperty circ:collection_and_sorting ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:collection_and_sorting ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:recycling_pathways ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:treatment_options ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:treatment_options ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:RecyclingPathways ;
+            owl:onProperty circ:recycling_pathways ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:recycling_pathways ] ;
+    skos:definition "Comprehensive end-of-life pathways and material recovery information" ;
+    skos:inScheme circ: ;
+    circ:references "ESPR Art 7 (2) b); Koppelaar et al.; Battery Pass; CE-RISE Deliverable 1.1" .
+
+circ:EnergyRecovery a owl:Class ;
+    rdfs:label "EnergyRecovery" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:emission_factors ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:caloric_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:caloric_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:emission_factors ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:caloric_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:emission_factors ] ;
+    skos:definition "Energy recovery from waste" ;
+    skos:inScheme circ: ;
+    circ:references "King et al." .
+
+circ:Landfilling a owl:Class ;
+    rdfs:label "Landfilling" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:leaching_potential ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:landfill_classification ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:leaching_potential ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:landfill_classification ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:leaching_potential ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:landfill_classification ] ;
+    skos:definition "Landfill disposal information" ;
+    skos:inScheme circ: .
+
+circ:LifespanFactors a owl:Class ;
+    rdfs:label "LifespanFactors" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:mean_time_between_failures ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:mean_time_between_failures ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:service_life ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:obsolescence_factors ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:obsolescence_factors ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:service_life ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:warranty_period ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:mean_time_between_failures ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:obsolescence_factors ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:warranty_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:service_life ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:warranty_period ] ;
+    skos:definition "Factors determining product lifespan and reliability" ;
+    skos:inScheme circ: ;
+    circ:references "ESPR; King et al." .
+
+circ:MaterialSelection a owl:Class ;
+    rdfs:label "MaterialSelection" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:material_passport ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:hazardous_substances ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:material_passport ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:renewable_content ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:hazardous_substances ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:recycled_content ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:material_passport ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:recycled_content ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:recycled_content ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:hazardous_substances ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:renewable_content ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:renewable_content ] ;
+    skos:definition "Material composition and selection for circularity" ;
+    skos:inScheme circ: ;
+    circ:comment "Includes CRMs and hazardous substances" ;
+    circ:references "Berger et al.; Battery Pass; CIRPASS" .
+
+circ:ModularDesign a owl:Class ;
+    rdfs:label "ModularDesign" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:standardized_interfaces ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:interchangeable_parts ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:modularity_level ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:modularity_level ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:interchangeable_parts ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:modularity_level ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:interchangeable_parts ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:standardized_interfaces ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:standardized_interfaces ] ;
+    skos:definition "Product modularity characteristics" ;
+    skos:inScheme circ: ;
+    circ:references "Jensen et al." .
+
+circ:NonRecyclableMaterials a owl:Class ;
+    rdfs:label "NonRecyclableMaterials" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:disposal_method ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:disposal_method ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:percentage ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:disposal_method ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:material_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:material_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:percentage ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:percentage ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:material_type ] ;
+    skos:definition "Information about non-recyclable materials" ;
+    skos:inScheme circ: ;
+    circ:references "King et al.; CE-RISE Deliverable 1.1" .
+
+circ:ProductPerformanceFactors a owl:Class ;
+    rdfs:label "ProductPerformanceFactors" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom circ:LifespanFactors ;
+            owl:onProperty circ:lifespan_factors ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:lifespan_factors ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:circular_capability ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:resource_efficiency ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:CircularCapability ;
+            owl:onProperty circ:circular_capability ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:ResourceEfficiency ;
+            owl:onProperty circ:resource_efficiency ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:lifespan_factors ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:resource_efficiency ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:circular_capability ] ;
+    skos:definition "Quantifiable factors that influence circular performance" ;
+    skos:inScheme circ: ;
+    circ:references "ESPR Annex I; King et al.; CE-RISE Deliverable 1.1" .
+
+circ:RecoveryMethods a owl:Class ;
+    rdfs:label "RecoveryMethods" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:recovery_rate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:extraction_process ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:economic_viability ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:economic_viability ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:recovery_rate ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:economic_viability ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:extraction_process ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:extraction_process ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:recovery_rate ] ;
+    skos:definition "Methods for recovering critical materials" ;
+    skos:inScheme circ: ;
+    circ:references "Koppelaar et al." .
+
+circ:RecyclableMaterials a owl:Class ;
+    rdfs:label "RecyclableMaterials" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:recycling_process ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:recycling_process ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:material_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:material_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:recycling_rate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:recycling_process ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:recycling_rate ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:recycling_rate ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:material_type ] ;
+    skos:definition "Information about recyclable materials" ;
+    skos:inScheme circ: ;
+    circ:references "King et al.; CIRPASS" .
+
+circ:RecyclingInfrastructure a owl:Class ;
+    rdfs:label "RecyclingInfrastructure" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:required_technology ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:geographic_availability ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:geographic_availability ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:geographic_availability ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:required_technology ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:required_technology ] ;
+    skos:definition "Infrastructure requirements for recycling" ;
+    skos:inScheme circ: ;
+    circ:references "Koppelaar et al." .
+
+circ:RecyclingPathways a owl:Class ;
+    rdfs:label "RecyclingPathways" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom circ:RecyclableMaterials ;
+            owl:onProperty circ:recyclable_materials ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:recycling_infrastructure ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:recyclable_materials ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:recycling_infrastructure ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:RecyclingInfrastructure ;
+            owl:onProperty circ:recycling_infrastructure ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:NonRecyclableMaterials ;
+            owl:onProperty circ:non_recyclable_materials ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:non_recyclable_materials ] ;
+    skos:definition "Material recycling pathways and infrastructure" ;
+    skos:inScheme circ: ;
+    circ:references "ESPR Art 7 (2) b) iii); King et al.; CE-RISE Deliverable 1.1" .
+
+circ:ResourceEfficiency a owl:Class ;
+    rdfs:label "ResourceEfficiency" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:water_footprint ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:material_intensity ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:waste_generation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:water_footprint ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:material_intensity ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:water_footprint ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:material_intensity ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:energy_efficiency ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:waste_generation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:waste_generation ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:energy_efficiency ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:energy_efficiency ] ;
+    skos:definition "Metrics related to resource use efficiency" ;
+    skos:inScheme circ: ;
+    circ:references "Berger et al.; King et al." .
+
+circ:SecondaryRawMaterials a owl:Class ;
+    rdfs:label "SecondaryRawMaterials" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:market_demand ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:market_demand ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:quality_grade ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:market_demand ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:quality_grade ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:quality_grade ] ;
+    skos:definition "Secondary materials from recovery" ;
+    skos:inScheme circ: .
+
+circ:SpecialTreatment a owl:Class ;
+    rdfs:label "SpecialTreatment" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:biological_treatment ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:biological_treatment ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:hazardous_waste_treatment ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:hazardous_waste_treatment ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:biological_treatment ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:hazardous_waste_treatment ] ;
+    skos:definition "Special treatment requirements" ;
+    skos:inScheme circ: .
+
+circ:SubScore a owl:Class ;
+    rdfs:label "SubScore" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:sub_score_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:sub_score_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty circ:sub_score_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:sub_score_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:sub_score_weight ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:sub_score_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:sub_score_weight ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:sub_score_weight ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty circ:sub_score_value ] ;
+    skos:definition "Component score within an assessment" ;
+    skos:inScheme circ: ;
+    circ:references "Berger et al." .
+
+circ:TreatmentOptions a owl:Class ;
+    rdfs:label "TreatmentOptions" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom circ:EnergyRecovery ;
+            owl:onProperty circ:energy_recovery ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:energy_recovery ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:special_treatment ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:energy_recovery ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:landfilling ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:Landfilling ;
+            owl:onProperty circ:landfilling ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty circ:special_treatment ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom circ:SpecialTreatment ;
+            owl:onProperty circ:special_treatment ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty circ:landfilling ] ;
+    skos:definition "Final treatment and disposal methods" ;
+    skos:inScheme circ: ;
+    circ:references "Koppelaar et al.; ESPR Art 7 (2) b) iii)" .
+
+circ:assessments a owl:ObjectProperty ;
+    rdfs:label "assessments" ;
+    skos:definition "Collection of assessments performed" ;
+    skos:inScheme circ: .
+
+circ:critical_materials_list a owl:ObjectProperty ;
+    rdfs:label "critical_materials_list" ;
+    skos:definition "List of critical materials" ;
+    skos:inScheme circ: .
+
+circ:non_recyclable_materials a owl:ObjectProperty ;
+    rdfs:label "non_recyclable_materials" ;
+    skos:definition "Materials that cannot be recycled" ;
+    skos:inScheme circ: .
+
+circ:recyclable_materials a owl:ObjectProperty ;
+    rdfs:label "recyclable_materials" ;
+    skos:definition "Materials that can be recycled" ;
+    skos:inScheme circ: .
+
+circ:sub_scores a owl:ObjectProperty ;
+    rdfs:label "sub_scores" ;
+    skos:definition "Breakdown of score components" ;
+    skos:inScheme circ: .
+
+circ:assessment_date a owl:DatatypeProperty ;
+    rdfs:label "assessment_date" ;
+    skos:definition "Date of assessment" ;
+    skos:inScheme circ: .
+
+circ:assessment_methodology a owl:DatatypeProperty ;
+    rdfs:label "assessment_methodology" ;
+    skos:definition "Methodology used" ;
+    skos:inScheme circ: .
+
+circ:assessment_reference a owl:DatatypeProperty ;
+    rdfs:label "assessment_reference" ;
+    skos:definition "External reference" ;
+    skos:inScheme circ: .
+
+circ:assessment_score a owl:DatatypeProperty ;
+    rdfs:label "assessment_score" ;
+    skos:definition "Overall score" ;
+    skos:inScheme circ: .
+
+circ:assessment_type a owl:DatatypeProperty ;
+    rdfs:label "assessment_type" ;
+    skos:definition "Type of assessment" ;
+    skos:inScheme circ: .
+
+circ:assessment_version a owl:DatatypeProperty ;
+    rdfs:label "assessment_version" ;
+    skos:definition "Version of methodology" ;
+    skos:inScheme circ: .
+
+circ:biological_treatment a owl:DatatypeProperty ;
+    rdfs:label "biological_treatment" ;
+    skos:definition "Biological treatment options" ;
+    skos:inScheme circ: .
+
+circ:caloric_value a owl:DatatypeProperty ;
+    rdfs:label "caloric_value" ;
+    skos:definition "Caloric value (MJ/kg)" ;
+    skos:inScheme circ: .
+
+circ:certification_status a owl:DatatypeProperty ;
+    rdfs:label "certification_status" ;
+    skos:definition "Certification status" ;
+    skos:inScheme circ: .
+
+circ:circular_capability a owl:ObjectProperty ;
+    rdfs:label "circular_capability" ;
+    skos:definition "Potential for circular economy strategies" ;
+    skos:inScheme circ: .
+
+circ:circularity_assessments a owl:ObjectProperty ;
+    rdfs:label "circularity_assessments" ;
+    skos:definition "Generic container for circularity assessments" ;
+    skos:inScheme circ: .
+
+circ:collection_and_sorting a owl:ObjectProperty ;
+    rdfs:label "collection_and_sorting" ;
+    skos:definition "Collection and sorting systems" ;
+    skos:inScheme circ: .
+
+circ:collection_schemes a owl:DatatypeProperty ;
+    rdfs:label "collection_schemes" ;
+    skos:definition "Available collection programs" ;
+    skos:inScheme circ: .
+
+circ:concentration a owl:DatatypeProperty ;
+    rdfs:label "concentration" ;
+    skos:definition "Concentration percentage" ;
+    skos:inScheme circ: .
+
+circ:crm_recovery a owl:ObjectProperty ;
+    rdfs:label "crm_recovery" ;
+    skos:definition "Critical raw materials recovery" ;
+    skos:inScheme circ: .
+
+circ:data_sources a owl:DatatypeProperty ;
+    rdfs:label "data_sources" ;
+    skos:definition "Data sources used" ;
+    skos:inScheme circ: .
+
+circ:design_for_circularity a owl:ObjectProperty ;
+    rdfs:label "design_for_circularity" ;
+    skos:definition "Design features that enable circular economy principles" ;
+    skos:inScheme circ: .
+
+circ:disassembly_features a owl:ObjectProperty ;
+    rdfs:label "disassembly_features" ;
+    skos:definition "Features facilitating product disassembly" ;
+    skos:inScheme circ: .
+
+circ:disassembly_instructions a owl:DatatypeProperty ;
+    rdfs:label "disassembly_instructions" ;
+    skos:definition "Disassembly guidance" ;
+    skos:inScheme circ: .
+
+circ:disassembly_time a owl:DatatypeProperty ;
+    rdfs:label "disassembly_time" ;
+    skos:definition "Time required for disassembly" ;
+    skos:inScheme circ: .
+
+circ:disposal_method a owl:DatatypeProperty ;
+    rdfs:label "disposal_method" ;
+    skos:definition "Disposal method required" ;
+    skos:inScheme circ: .
+
+circ:durability_features a owl:ObjectProperty ;
+    rdfs:label "durability_features" ;
+    skos:definition "Features enhancing product durability and longevity" ;
+    skos:inScheme circ: .
+
+circ:economic_viability a owl:DatatypeProperty ;
+    rdfs:label "economic_viability" ;
+    skos:definition "Economic viability assessment" ;
+    skos:inScheme circ: .
+
+circ:emission_factors a owl:DatatypeProperty ;
+    rdfs:label "emission_factors" ;
+    skos:definition "Emission factors" ;
+    skos:inScheme circ: .
+
+circ:end_of_life_information a owl:ObjectProperty ;
+    rdfs:label "end_of_life_information" ;
+    skos:definition "End-of-life pathways and recovery information" ;
+    skos:inScheme circ: .
+
+circ:energy_efficiency a owl:DatatypeProperty ;
+    rdfs:label "energy_efficiency" ;
+    skos:definition "Energy consumption efficiency" ;
+    skos:inScheme circ: .
+
+circ:energy_recovery a owl:ObjectProperty ;
+    rdfs:label "energy_recovery" ;
+    skos:definition "Energy recovery potential" ;
+    skos:inScheme circ: .
+
+circ:expected_lifetime a owl:DatatypeProperty ;
+    rdfs:label "expected_lifetime" ;
+    skos:definition "Expected operational lifetime" ;
+    skos:inScheme circ: .
+
+circ:extraction_process a owl:DatatypeProperty ;
+    rdfs:label "extraction_process" ;
+    skos:definition "Extraction process description" ;
+    skos:inScheme circ: .
+
+circ:fastener_types a owl:DatatypeProperty ;
+    rdfs:label "fastener_types" ;
+    skos:definition "Types of fasteners used" ;
+    skos:inScheme circ: .
+
+circ:geographic_availability a owl:DatatypeProperty ;
+    rdfs:label "geographic_availability" ;
+    skos:definition "Geographic coverage" ;
+    skos:inScheme circ: .
+
+circ:hazardous_substances a owl:DatatypeProperty ;
+    rdfs:label "hazardous_substances" ;
+    skos:definition "Hazardous substances present" ;
+    skos:inScheme circ: .
+
+circ:hazardous_waste_treatment a owl:DatatypeProperty ;
+    rdfs:label "hazardous_waste_treatment" ;
+    skos:definition "Hazardous waste treatment" ;
+    skos:inScheme circ: .
+
+circ:interchangeable_parts a owl:DatatypeProperty ;
+    rdfs:label "interchangeable_parts" ;
+    skos:definition "Parts that can be interchanged" ;
+    skos:inScheme circ: .
+
+circ:landfill_classification a owl:DatatypeProperty ;
+    rdfs:label "landfill_classification" ;
+    skos:definition "Type of landfill" ;
+    skos:inScheme circ: .
+
+circ:landfilling a owl:ObjectProperty ;
+    rdfs:label "landfilling" ;
+    skos:definition "Landfilling information" ;
+    skos:inScheme circ: .
+
+circ:leaching_potential a owl:DatatypeProperty ;
+    rdfs:label "leaching_potential" ;
+    skos:definition "Leaching risk assessment" ;
+    skos:inScheme circ: .
+
+circ:lifespan_factors a owl:ObjectProperty ;
+    rdfs:label "lifespan_factors" ;
+    skos:definition "Factors affecting product lifespan" ;
+    skos:inScheme circ: .
+
+circ:maintenance_schedule a owl:DatatypeProperty ;
+    rdfs:label "maintenance_schedule" ;
+    skos:definition "Maintenance requirements" ;
+    skos:inScheme circ: .
+
+circ:market_demand a owl:DatatypeProperty ;
+    rdfs:label "market_demand" ;
+    skos:definition "Market demand assessment" ;
+    skos:inScheme circ: .
+
+circ:material_intensity a owl:DatatypeProperty ;
+    rdfs:label "material_intensity" ;
+    skos:definition "Material use per functional unit" ;
+    skos:inScheme circ: .
+
+circ:material_name a owl:DatatypeProperty ;
+    rdfs:label "material_name" ;
+    skos:definition "Name of critical material" ;
+    skos:inScheme circ: .
+
+circ:material_passport a owl:DatatypeProperty ;
+    rdfs:label "material_passport" ;
+    skos:definition "Material passport reference" ;
+    skos:inScheme circ: .
+
+circ:material_selection a owl:ObjectProperty ;
+    rdfs:label "material_selection" ;
+    skos:definition "Material choices supporting circularity" ;
+    skos:inScheme circ: .
+
+circ:mean_time_between_failures a owl:DatatypeProperty ;
+    rdfs:label "mean_time_between_failures" ;
+    skos:definition "MTBF reliability metric" ;
+    skos:inScheme circ: .
+
+circ:modular_design a owl:ObjectProperty ;
+    rdfs:label "modular_design" ;
+    skos:definition "Modularity aspects of the product design" ;
+    skos:inScheme circ: .
+
+circ:modularity_level a owl:DatatypeProperty ;
+    rdfs:label "modularity_level" ;
+    skos:definition "Degree of product modularity" ;
+    skos:inScheme circ: .
+
+circ:obsolescence_factors a owl:DatatypeProperty ;
+    rdfs:label "obsolescence_factors" ;
+    skos:definition "Factors leading to obsolescence" ;
+    skos:inScheme circ: .
+
+circ:percentage a owl:DatatypeProperty ;
+    rdfs:label "percentage" ;
+    skos:definition "Percentage of total" ;
+    skos:inScheme circ: .
+
+circ:product_performance_factors a owl:ObjectProperty ;
+    rdfs:label "product_performance_factors" ;
+    skos:definition "Quantifiable factors influencing circular performance" ;
+    skos:inScheme circ: .
+
+circ:quality_grade a owl:DatatypeProperty ;
+    rdfs:label "quality_grade" ;
+    skos:definition "Quality grade of materials" ;
+    skos:inScheme circ: .
+
+circ:quantity a owl:DatatypeProperty ;
+    rdfs:label "quantity" ;
+    skos:definition "Quantity present" ;
+    skos:inScheme circ: .
+
+circ:recovery_methods a owl:ObjectProperty ;
+    rdfs:label "recovery_methods" ;
+    skos:definition "Methods for recovery" ;
+    skos:inScheme circ: .
+
+circ:recovery_rate a owl:DatatypeProperty ;
+    rdfs:label "recovery_rate" ;
+    skos:definition "Recovery rate percentage" ;
+    skos:inScheme circ: .
+
+circ:recycled_content a owl:DatatypeProperty ;
+    rdfs:label "recycled_content" ;
+    skos:definition "Percentage of recycled content" ;
+    skos:inScheme circ: .
+
+circ:recycling_infrastructure a owl:ObjectProperty ;
+    rdfs:label "recycling_infrastructure" ;
+    skos:definition "Required recycling infrastructure" ;
+    skos:inScheme circ: .
+
+circ:recycling_pathways a owl:ObjectProperty ;
+    rdfs:label "recycling_pathways" ;
+    skos:definition "Recycling routes and infrastructure" ;
+    skos:inScheme circ: .
+
+circ:recycling_potential a owl:DatatypeProperty ;
+    rdfs:label "recycling_potential" ;
+    skos:definition "Potential for material recycling" ;
+    skos:inScheme circ: .
+
+circ:recycling_process a owl:DatatypeProperty ;
+    rdfs:label "recycling_process" ;
+    skos:definition "Required recycling process" ;
+    skos:inScheme circ: .
+
+circ:recycling_rate a owl:DatatypeProperty ;
+    rdfs:label "recycling_rate" ;
+    skos:definition "Recycling rate percentage" ;
+    skos:inScheme circ: .
+
+circ:refurbishment_potential a owl:DatatypeProperty ;
+    rdfs:label "refurbishment_potential" ;
+    skos:definition "Potential for refurbishment" ;
+    skos:inScheme circ: .
+
+circ:remanufacturing_potential a owl:DatatypeProperty ;
+    rdfs:label "remanufacturing_potential" ;
+    skos:definition "Potential for remanufacturing" ;
+    skos:inScheme circ: .
+
+circ:renewable_content a owl:DatatypeProperty ;
+    rdfs:label "renewable_content" ;
+    skos:definition "Percentage of renewable content" ;
+    skos:inScheme circ: .
+
+circ:repairability_index a owl:DatatypeProperty ;
+    rdfs:label "repairability_index" ;
+    skos:definition "Repairability score or index" ;
+    skos:inScheme circ: .
+
+circ:required_technology a owl:DatatypeProperty ;
+    rdfs:label "required_technology" ;
+    skos:definition "Technology needed" ;
+    skos:inScheme circ: .
+
+circ:required_tools a owl:DatatypeProperty ;
+    rdfs:label "required_tools" ;
+    skos:definition "Tools needed for disassembly" ;
+    skos:inScheme circ: .
+
+circ:resource_efficiency a owl:ObjectProperty ;
+    rdfs:label "resource_efficiency" ;
+    skos:definition "Resource efficiency metrics" ;
+    skos:inScheme circ: .
+
+circ:reuse_potential a owl:DatatypeProperty ;
+    rdfs:label "reuse_potential" ;
+    skos:definition "Potential for direct reuse" ;
+    skos:inScheme circ: .
+
+circ:score_range a owl:DatatypeProperty ;
+    rdfs:label "score_range" ;
+    skos:definition "Valid score range" ;
+    skos:inScheme circ: .
+
+circ:score_unit a owl:DatatypeProperty ;
+    rdfs:label "score_unit" ;
+    skos:definition "Unit of score" ;
+    skos:inScheme circ: .
+
+circ:secondary_raw_materials a owl:ObjectProperty ;
+    rdfs:label "secondary_raw_materials" ;
+    skos:definition "Secondary materials produced" ;
+    skos:inScheme circ: .
+
+circ:service_life a owl:DatatypeProperty ;
+    rdfs:label "service_life" ;
+    skos:definition "Expected service lifetime" ;
+    skos:inScheme circ: .
+
+circ:sorting_instructions a owl:DatatypeProperty ;
+    rdfs:label "sorting_instructions" ;
+    skos:definition "Sorting guidance" ;
+    skos:inScheme circ: .
+
+circ:special_treatment a owl:ObjectProperty ;
+    rdfs:label "special_treatment" ;
+    skos:definition "Special treatment requirements" ;
+    skos:inScheme circ: .
+
+circ:standardized_interfaces a owl:DatatypeProperty ;
+    rdfs:label "standardized_interfaces" ;
+    skos:definition "Standardized connection interfaces" ;
+    skos:inScheme circ: .
+
+circ:sub_score_name a owl:DatatypeProperty ;
+    rdfs:label "sub_score_name" ;
+    skos:definition "Name of sub-score" ;
+    skos:inScheme circ: .
+
+circ:sub_score_value a owl:DatatypeProperty ;
+    rdfs:label "sub_score_value" ;
+    skos:definition "Value of sub-score" ;
+    skos:inScheme circ: .
+
+circ:sub_score_weight a owl:DatatypeProperty ;
+    rdfs:label "sub_score_weight" ;
+    skos:definition "Weight in overall score" ;
+    skos:inScheme circ: .
+
+circ:take_back_programs a owl:DatatypeProperty ;
+    rdfs:label "take_back_programs" ;
+    skos:definition "Take-back program details" ;
+    skos:inScheme circ: .
+
+circ:treatment_options a owl:ObjectProperty ;
+    rdfs:label "treatment_options" ;
+    skos:definition "Final treatment and disposal options" ;
+    skos:inScheme circ: .
+
+circ:upgrade_capability a owl:DatatypeProperty ;
+    rdfs:label "upgrade_capability" ;
+    skos:definition "Upgrade possibilities" ;
+    skos:inScheme circ: .
+
+circ:warranty_period a owl:DatatypeProperty ;
+    rdfs:label "warranty_period" ;
+    skos:definition "Warranty duration offered" ;
+    skos:inScheme circ: .
+
+circ:waste_classification a owl:DatatypeProperty ;
+    rdfs:label "waste_classification" ;
+    skos:definition "Waste classification codes" ;
+    skos:inScheme circ: .
+
+circ:waste_generation a owl:DatatypeProperty ;
+    rdfs:label "waste_generation" ;
+    skos:definition "Waste generated during lifecycle" ;
+    skos:inScheme circ: .
+
+circ:water_footprint a owl:DatatypeProperty ;
+    rdfs:label "water_footprint" ;
+    skos:definition "Water consumption footprint" ;
+    skos:inScheme circ: .
+
+circ:material_type a owl:DatatypeProperty .
+
+
