@@ -2,6 +2,11 @@
 
 All notable changes to the CE-RISE Circularity and End-of-Life Data Model will be documented in this file.
 
+## [0.0.2] - 2025-12-15
+
+### Added
+- Missign references to lit etc. that were in Beta release of the data model.
+
 ## [0.0.1] - 2025-12-12
 
 ### Added

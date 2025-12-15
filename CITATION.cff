@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: CE-RISE Circularity and End-of-Life
 message: >-
-  v0.0.1 - Initial implementation of the Circularity and End-of-Life data model with comprehensive 4-stage structure for design-for-circularity, performance factors, assessments, and end-of-life pathways.
+  v0.0.2 - Added refs from Beta data model release.
 type: software
 doi: 10.5281/zenodo.17912234
 authors:
