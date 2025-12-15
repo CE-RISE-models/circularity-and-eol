@@ -79,8 +79,8 @@ slots:
         annotations:
             owl.filler: chebi:78298 # CHEBI hazardous substance reference
             sql_identifier: circ_design_hazardous_substances
-            references: "ESPR Art 7 5. a); Battery Pass; CIRPASS; King et al.; Deliverable 1.1"
-            comment: "Name of substances of concern as per REACH, ROHS regulations"
+            references: "ESPR Art 7 5. a); Battery Pass; CIRPASS; King et al.; CE-RISE Deliverable 1.1; CLP Regulation (EC) No 1272/2008"
+            comment: "Name of substances of concern as per REACH, RoHS regulations; concentration threshold 0.1% weight by weight (SCIP database requirement)"
 
     material_passport_value:
         description: "Reference or link to material passport documentation"
@@ -112,7 +112,7 @@ slots:
         annotations:
             owl.filler: schema:instructions
             sql_identifier: circ_design_disassembly_instructions
-            references: "ESPR Art 7 (2) b) iii); King et al.; Jensen et al.; CE-RISE Deliverable 1.1"
+            references: "ESPR Art 7 (2) b) iii); King et al.; Jensen et al.; CE-RISE Deliverable 1.1; Wan and Jiang"
 
     fastener_types_value:
         description: "Types of fasteners used in product assembly"
@@ -152,7 +152,7 @@ slots:
         annotations:
             owl.filler: schema:maintenanceSchedule
             sql_identifier: circ_design_maintenance_schedule
-            references: "ESPR; CIRPASS; King et al.; Jensen et al.; CE-RISE Deliverable 1.1"
+            references: "ESPR; CIRPASS; King et al.; Jensen et al.; CE-RISE Deliverable 1.1; Wan and Jiang"
 
     # Stage 2: Product Performance Factors slots
 
@@ -250,7 +250,7 @@ slots:
         annotations:
             owl.filler: circ:recyclingPotential
             sql_identifier: circ_perf_recycling_potential
-            references: "King et al.; CE-RISE Deliverable 1.1"
+            references: "King et al.; CE-RISE Deliverable 1.1; Cruz et al."
 
     # Stage 3: Circularity Assessments slots
 
@@ -380,7 +380,7 @@ slots:
         annotations:
             owl.filler: circ:takeBackProgram
             sql_identifier: circ_eol_take_back_programs
-            references: "ESPR Art 7 (2) b) ii); CIRPASS; King et al.; Battery Pass; CE-RISE Deliverable 1.1"
+            references: "ESPR Art 7 (2) b) ii); CIRPASS; King et al.; Battery Pass; CE-RISE Deliverable 1.1; Christensen et al."
 
     # Recycling Pathways slots
     material_type_recyclable_value:
@@ -425,7 +425,7 @@ slots:
         annotations:
             owl.filler: circ:disposalMethod
             sql_identifier: circ_eol_disposal_method
-            references: "ESPR Art 7 (2) b) iii); CE-RISE Deliverable 1.1"
+            references: "ESPR Art 7 (2) b) iii); CE-RISE Deliverable 1.1; Christensen et al."
 
     required_technology_value:
         description: "Technology required for recycling"
@@ -465,7 +465,7 @@ slots:
         annotations:
             owl.filler: circ:concentration
             sql_identifier: circ_eol_crm_concentration
-            references: "ESPR Art 7 5. c); Battery Pass; CIRPASS; CE-RISE Deliverable 1.1"
+            references: "ESPR Art 7 5. c); Battery Pass; CIRPASS; CE-RISE Deliverable 1.1; CLP Regulation (EC) No 1272/2008"
 
     extraction_process_value:
         description: "Process for extracting critical materials"
@@ -535,8 +535,8 @@ slots:
         annotations:
             owl.filler: circ:leachingPotential
             sql_identifier: circ_eol_leaching_potential
-            references: "ESPR Art 7 5. b); Battery Pass; CIRPASS"
-            comment: "Location of substances of concern"
+            references: "ESPR Art 7 5. b); Battery Pass; CIRPASS; SCIP database"
+            comment: "Location of substances of concern within the product; reporting required for substances above 0.1% w/w"
 
     hazardous_waste_treatment_value:
         description: "Treatment methods for hazardous waste"
@@ -544,7 +544,7 @@ slots:
         annotations:
             owl.filler: circ:hazardousWasteTreatment
             sql_identifier: circ_eol_hazardous_treatment
-            references: "ESPR Art 7 5. d); REACH; ROHS; King et al."
+            references: "ESPR Art 7 5. d); REACH Regulation (EC) No 1907/2006; RoHS Directive 2011/65/EU; King et al."
 
     biological_treatment_value:
         description: "Biological treatment options (composting, anaerobic digestion)"
@@ -559,7 +559,7 @@ classes:
     CircularityAndEOL:
         description: "Root container for circularity and end-of-life information"
         annotations:
-            references: "ESPR; CIRPASS; Battery Pass; King et al.; Jensen et al.; Berger et al.; Koppelaar et al."
+            references: "ESPR; CIRPASS; Battery Pass; King et al.; Jensen et al.; Berger et al.; Koppelaar et al.; Cruz et al.; Christensen et al."
         attributes:
             design_for_circularity:
                 description: "Design features that enable circular economy principles"
