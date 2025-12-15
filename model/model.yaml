@@ -63,6 +63,7 @@ slots:
         annotations:
             owl.filler: circ:recycledContentPercentage
             sql_identifier: circ_design_recycled_content
+            references: "ESPR Annex I; CIRPASS; Battery Pass; King et al.; Jensen et al.; CE-RISE Deliverable 1.1"
 
     renewable_content_value:
         description: "Percentage of renewable materials in the product"
@@ -70,6 +71,7 @@ slots:
         annotations:
             owl.filler: circ:renewableContentPercentage
             sql_identifier: circ_design_renewable_content
+            references: "Battery Pass; CIRPASS; King et al."
 
     hazardous_substances_value:
         description: "List of hazardous substances present in the product"
@@ -77,6 +79,8 @@ slots:
         annotations:
             owl.filler: chebi:78298 # CHEBI hazardous substance reference
             sql_identifier: circ_design_hazardous_substances
+            references: "ESPR Art 7 5. a); Battery Pass; CIRPASS; King et al.; Deliverable 1.1"
+            comment: "Name of substances of concern as per REACH, ROHS regulations"
 
     material_passport_value:
         description: "Reference or link to material passport documentation"
@@ -84,6 +88,7 @@ slots:
         annotations:
             owl.filler: circ:hasMaterialPassport
             sql_identifier: circ_design_material_passport
+            references: "CIRPASS; Battery Pass"
 
     # Disassembly Features slots
     disassembly_time_value:
@@ -92,6 +97,7 @@ slots:
         annotations:
             owl.filler: circ:disassemblyTime
             sql_identifier: circ_design_disassembly_time
+            references: "King et al.; ESPR Annex I"
 
     required_tools_value:
         description: "List of tools required for disassembly"
@@ -106,6 +112,7 @@ slots:
         annotations:
             owl.filler: schema:instructions
             sql_identifier: circ_design_disassembly_instructions
+            references: "ESPR Art 7 (2) b) iii); King et al.; Jensen et al.; CE-RISE Deliverable 1.1"
 
     fastener_types_value:
         description: "Types of fasteners used in product assembly"
@@ -121,6 +128,7 @@ slots:
         annotations:
             owl.filler: schema:expectedLifetime
             sql_identifier: circ_design_expected_lifetime
+            references: "ESPR; CE-RISE Deliverable 1.1"
 
     repairability_index_value:
         description: "Repairability index score or classification"
@@ -128,6 +136,7 @@ slots:
         annotations:
             owl.filler: circ:repairabilityIndex
             sql_identifier: circ_design_repairability_index
+            references: "King et al.; CE-RISE Deliverable 1.1"
 
     upgrade_capability_value:
         description: "Description of upgrade possibilities and modular improvements"
@@ -135,6 +144,7 @@ slots:
         annotations:
             owl.filler: circ:upgradeCapability
             sql_identifier: circ_design_upgrade_capability
+            references: "ESPR Art. 1 5.; ESPR Annex I; CE-RISE Deliverable 1.1"
 
     maintenance_schedule_value:
         description: "Recommended maintenance schedule and intervals"
@@ -142,6 +152,7 @@ slots:
         annotations:
             owl.filler: schema:maintenanceSchedule
             sql_identifier: circ_design_maintenance_schedule
+            references: "ESPR; CIRPASS; King et al.; Jensen et al.; CE-RISE Deliverable 1.1"
 
     # Stage 2: Product Performance Factors slots
 
@@ -152,6 +163,7 @@ slots:
         annotations:
             owl.filler: qudt:materialIntensity
             sql_identifier: circ_perf_material_intensity
+            references: "Berger et al.; King et al."
 
     energy_efficiency_value:
         description: "Energy efficiency rating or consumption (kWh/unit)"
@@ -159,6 +171,7 @@ slots:
         annotations:
             owl.filler: qudt:energyEfficiency
             sql_identifier: circ_perf_energy_efficiency
+            references: "King et al.; Energy Labelling Directive"
 
     water_footprint_value:
         description: "Water consumption per functional unit (liters/unit)"
@@ -166,6 +179,7 @@ slots:
         annotations:
             owl.filler: envo:01001026 # ENVO water footprint
             sql_identifier: circ_perf_water_footprint
+            references: "King et al.; CE-RISE Deliverable 1.1"
 
     waste_generation_value:
         description: "Waste generated during product lifecycle (kg)"
@@ -173,6 +187,7 @@ slots:
         annotations:
             owl.filler: circ:wasteGeneration
             sql_identifier: circ_perf_waste_generation
+            references: "King et al."
 
     # Lifespan Factors slots
     mean_time_between_failures_value:
@@ -188,6 +203,7 @@ slots:
         annotations:
             owl.filler: schema:warrantyPeriod
             sql_identifier: circ_perf_warranty_period
+            references: "ESPR; CIRPASS"
 
     service_life_value:
         description: "Expected service life under normal conditions (in years)"
@@ -210,6 +226,7 @@ slots:
         annotations:
             owl.filler: circ:reusePotential
             sql_identifier: circ_perf_reuse_potential
+            references: "King et al.; CE-RISE Deliverable 1.1"
 
     refurbishment_potential_value:
         description: "Potential for product refurbishment (qualitative or percentage)"
@@ -217,6 +234,7 @@ slots:
         annotations:
             owl.filler: circ:refurbishmentPotential
             sql_identifier: circ_perf_refurbish_potential
+            references: "King et al.; CE-RISE Deliverable 1.1"
 
     remanufacturing_potential_value:
         description: "Potential for product remanufacturing (qualitative or percentage)"
@@ -224,6 +242,7 @@ slots:
         annotations:
             owl.filler: circ:remanufacturingPotential
             sql_identifier: circ_perf_remanufacture_potential
+            references: "King et al.; CE-RISE Deliverable 1.1"
 
     recycling_potential_value:
         description: "Potential for material recycling (qualitative or percentage)"
@@ -231,6 +250,7 @@ slots:
         annotations:
             owl.filler: circ:recyclingPotential
             sql_identifier: circ_perf_recycling_potential
+            references: "King et al.; CE-RISE Deliverable 1.1"
 
     # Stage 3: Circularity Assessments slots
 
@@ -303,6 +323,7 @@ slots:
         annotations:
             owl.filler: circ:certificationStatus
             sql_identifier: circ_assessment_certification
+            references: "ESPR; Battery Pass; CIRPASS"
 
     # SubScore slots
     sub_score_name_value:
@@ -335,6 +356,7 @@ slots:
         annotations:
             owl.filler: circ:collectionSchemes
             sql_identifier: circ_eol_collection_schemes
+            references: "ESPR Art 7 (2) b) ii); Battery Pass; Jensen et al."
 
     sorting_instructions_value:
         description: "Instructions for waste sorting and separation"
@@ -342,6 +364,7 @@ slots:
         annotations:
             owl.filler: schema:instructions
             sql_identifier: circ_eol_sorting_instructions
+            references: "Jensen et al."
 
     waste_classification_value:
         description: "Waste classification codes and categories"
@@ -349,6 +372,7 @@ slots:
         annotations:
             owl.filler: envo:00002001 # ENVO waste material
             sql_identifier: circ_eol_waste_classification
+            references: "ESPR; Battery Pass"
 
     take_back_programs_value:
         description: "Manufacturer or retailer take-back program details"
@@ -356,6 +380,7 @@ slots:
         annotations:
             owl.filler: circ:takeBackProgram
             sql_identifier: circ_eol_take_back_programs
+            references: "ESPR Art 7 (2) b) ii); CIRPASS; King et al.; Battery Pass; CE-RISE Deliverable 1.1"
 
     # Recycling Pathways slots
     material_type_recyclable_value:
@@ -385,6 +410,7 @@ slots:
         annotations:
             owl.filler: chebi:24431
             sql_identifier: circ_eol_non_recyclable_material_type
+            references: "King et al.; CE-RISE Deliverable 1.1"
 
     non_recyclable_percentage_value:
         description: "Percentage of non-recyclable materials"
@@ -399,6 +425,7 @@ slots:
         annotations:
             owl.filler: circ:disposalMethod
             sql_identifier: circ_eol_disposal_method
+            references: "ESPR Art 7 (2) b) iii); CE-RISE Deliverable 1.1"
 
     required_technology_value:
         description: "Technology required for recycling"
@@ -421,6 +448,8 @@ slots:
         annotations:
             owl.filler: circ:criticalMaterialName
             sql_identifier: circ_eol_crm_material_name
+            references: "Koppelaar et al.; Berger et al.; Battery Pass"
+            comment: "Material type includes CRMs"
 
     crm_quantity_value:
         description: "Quantity of critical material (in grams or kilograms)"
@@ -428,6 +457,7 @@ slots:
         annotations:
             owl.filler: qudt:quantity
             sql_identifier: circ_eol_crm_quantity
+            references: "Koppelaar et al."
 
     crm_concentration_value:
         description: "Concentration of critical material (percentage)"
@@ -435,6 +465,7 @@ slots:
         annotations:
             owl.filler: circ:concentration
             sql_identifier: circ_eol_crm_concentration
+            references: "ESPR Art 7 5. c); Battery Pass; CIRPASS; CE-RISE Deliverable 1.1"
 
     extraction_process_value:
         description: "Process for extracting critical materials"
@@ -442,6 +473,7 @@ slots:
         annotations:
             owl.filler: circ:extractionProcess
             sql_identifier: circ_eol_extraction_process
+            references: "Koppelaar et al."
 
     crm_recovery_rate_value:
         description: "Recovery rate for critical materials (percentage)"
@@ -449,6 +481,7 @@ slots:
         annotations:
             owl.filler: circ:recoveryRate
             sql_identifier: circ_eol_crm_recovery_rate
+            references: "Koppelaar et al."
 
     economic_viability_value:
         description: "Economic viability assessment of CRM recovery"
@@ -456,6 +489,7 @@ slots:
         annotations:
             owl.filler: circ:economicViability
             sql_identifier: circ_eol_economic_viability
+            references: "Koppelaar et al."
 
     quality_grade_value:
         description: "Quality grade of secondary raw materials"
@@ -463,6 +497,7 @@ slots:
         annotations:
             owl.filler: circ:qualityGrade
             sql_identifier: circ_eol_quality_grade
+            references: "Koppelaar et al."
 
     market_demand_value:
         description: "Market demand for secondary materials"
@@ -470,6 +505,7 @@ slots:
         annotations:
             owl.filler: circ:marketDemand
             sql_identifier: circ_eol_market_demand
+            references: "Koppelaar et al.; CE-RISE Deliverable 1.1"
 
     # Treatment Options slots
     caloric_value_value:
@@ -499,6 +535,8 @@ slots:
         annotations:
             owl.filler: circ:leachingPotential
             sql_identifier: circ_eol_leaching_potential
+            references: "ESPR Art 7 5. b); Battery Pass; CIRPASS"
+            comment: "Location of substances of concern"
 
     hazardous_waste_treatment_value:
         description: "Treatment methods for hazardous waste"
@@ -506,6 +544,7 @@ slots:
         annotations:
             owl.filler: circ:hazardousWasteTreatment
             sql_identifier: circ_eol_hazardous_treatment
+            references: "ESPR Art 7 5. d); REACH; ROHS; King et al."
 
     biological_treatment_value:
         description: "Biological treatment options (composting, anaerobic digestion)"
@@ -513,10 +552,14 @@ slots:
         annotations:
             owl.filler: circ:biologicalTreatment
             sql_identifier: circ_eol_biological_treatment
+            references: "King et al."
+            comment: "Compostability options"
 
 classes:
     CircularityAndEOL:
         description: "Root container for circularity and end-of-life information"
+        annotations:
+            references: "ESPR; CIRPASS; Battery Pass; King et al.; Jensen et al.; Berger et al.; Koppelaar et al."
         attributes:
             design_for_circularity:
                 description: "Design features that enable circular economy principles"
@@ -533,6 +576,8 @@ classes:
 
     DesignForCircularity:
         description: "Design decisions and features that enable circular economy principles"
+        annotations:
+            references: "ESPR Annex I; CIRPASS; Battery Pass"
         attributes:
             modular_design:
                 description: "Modularity aspects of the product design"
@@ -549,6 +594,8 @@ classes:
 
     ModularDesign:
         description: "Product modularity characteristics"
+        annotations:
+            references: "Jensen et al."
         attributes:
             modularity_level:
                 description: "Degree of product modularity"
@@ -562,6 +609,9 @@ classes:
 
     MaterialSelection:
         description: "Material composition and selection for circularity"
+        annotations:
+            references: "Berger et al.; Battery Pass; CIRPASS"
+            comment: "Includes CRMs and hazardous substances"
         attributes:
             recycled_content:
                 description: "Percentage of recycled content"
@@ -578,6 +628,9 @@ classes:
 
     DisassemblyFeatures:
         description: "Product disassembly characteristics"
+        annotations:
+            references: "ESPR Art 7 5. e); King et al."
+            comment: "Information relevant for disassembly"
         attributes:
             disassembly_time:
                 description: "Time required for disassembly"
@@ -594,6 +647,8 @@ classes:
 
     DurabilityFeatures:
         description: "Product durability and maintenance characteristics"
+        annotations:
+            references: "ESPR Art. 1 5.; ESPR Annex I; King et al."
         attributes:
             expected_lifetime:
                 description: "Expected operational lifetime"
@@ -610,6 +665,8 @@ classes:
 
     ProductPerformanceFactors:
         description: "Quantifiable factors that influence circular performance"
+        annotations:
+            references: "ESPR Annex I; King et al.; CE-RISE Deliverable 1.1"
         attributes:
             resource_efficiency:
                 description: "Resource efficiency metrics"
@@ -623,6 +680,8 @@ classes:
 
     ResourceEfficiency:
         description: "Metrics related to resource use efficiency"
+        annotations:
+            references: "Berger et al.; King et al."
         attributes:
             material_intensity:
                 description: "Material use per functional unit"
@@ -639,6 +698,8 @@ classes:
 
     LifespanFactors:
         description: "Factors determining product lifespan and reliability"
+        annotations:
+            references: "ESPR; King et al."
         attributes:
             mean_time_between_failures:
                 description: "MTBF reliability metric"
@@ -655,6 +716,8 @@ classes:
 
     CircularCapability:
         description: "Potential for circular economy strategies"
+        annotations:
+            references: "King et al.; CE-RISE Deliverable 1.1"
         attributes:
             reuse_potential:
                 description: "Potential for direct reuse"
@@ -671,6 +734,8 @@ classes:
 
     CircularityAssessments:
         description: "Container for circularity-related assessments of any type"
+        annotations:
+            references: "King et al.; Berger et al.; CIRPASS"
         attributes:
             assessments:
                 description: "Collection of assessments performed"
@@ -679,6 +744,8 @@ classes:
 
     Assessment:
         description: "A single assessment instance with methodology and results"
+        annotations:
+            references: "Berger et al.; King et al.; Battery Pass"
         attributes:
             assessment_type:
                 description: "Type of assessment"
@@ -717,6 +784,8 @@ classes:
 
     SubScore:
         description: "Component score within an assessment"
+        annotations:
+            references: "Berger et al."
         attributes:
             sub_score_name:
                 description: "Name of sub-score"
@@ -730,6 +799,8 @@ classes:
 
     EndOfLifeInformation:
         description: "Comprehensive end-of-life pathways and material recovery information"
+        annotations:
+            references: "ESPR Art 7 (2) b); Koppelaar et al.; Battery Pass; CE-RISE Deliverable 1.1"
         attributes:
             collection_and_sorting:
                 description: "Collection and sorting systems"
@@ -746,6 +817,8 @@ classes:
 
     CollectionAndSorting:
         description: "Waste collection and sorting information"
+        annotations:
+            references: "Jensen et al.; ESPR Art 7 (2) b) ii)"
         attributes:
             collection_schemes:
                 description: "Available collection programs"
@@ -762,6 +835,8 @@ classes:
 
     RecyclingPathways:
         description: "Material recycling pathways and infrastructure"
+        annotations:
+            references: "ESPR Art 7 (2) b) iii); King et al.; CE-RISE Deliverable 1.1"
         attributes:
             recyclable_materials:
                 description: "Materials that can be recycled"
@@ -777,6 +852,8 @@ classes:
 
     RecyclableMaterials:
         description: "Information about recyclable materials"
+        annotations:
+            references: "King et al.; CIRPASS"
         attributes:
             material_type:
                 description: "Type of recyclable material"
@@ -790,6 +867,8 @@ classes:
 
     NonRecyclableMaterials:
         description: "Information about non-recyclable materials"
+        annotations:
+            references: "King et al.; CE-RISE Deliverable 1.1"
         attributes:
             material_type:
                 description: "Type of non-recyclable material"
@@ -803,6 +882,8 @@ classes:
 
     RecyclingInfrastructure:
         description: "Infrastructure requirements for recycling"
+        annotations:
+            references: "Koppelaar et al."
         attributes:
             required_technology:
                 description: "Technology needed"
@@ -813,6 +894,9 @@ classes:
 
     CRMRecovery:
         description: "Critical raw materials recovery information"
+        annotations:
+            references: "Koppelaar et al.; Battery Pass"
+            comment: "Critical Raw Materials recovery and treatment"
         attributes:
             critical_materials_list:
                 description: "List of critical materials"
@@ -827,6 +911,8 @@ classes:
 
     CriticalMaterial:
         description: "Information about a critical raw material"
+        annotations:
+            references: "Koppelaar et al.; Berger et al.; Battery Pass"
         attributes:
             material_name:
                 description: "Name of critical material"
@@ -840,6 +926,8 @@ classes:
 
     RecoveryMethods:
         description: "Methods for recovering critical materials"
+        annotations:
+            references: "Koppelaar et al."
         attributes:
             extraction_process:
                 description: "Extraction process description"
@@ -862,7 +950,9 @@ classes:
                 range: string
 
     TreatmentOptions:
-        description: "Final treatment and disposal options"
+        description: "Final treatment and disposal methods"
+        annotations:
+            references: "Koppelaar et al.; ESPR Art 7 (2) b) iii)"
         attributes:
             energy_recovery:
                 description: "Energy recovery potential"
@@ -876,6 +966,8 @@ classes:
 
     EnergyRecovery:
         description: "Energy recovery from waste"
+        annotations:
+            references: "King et al."
         attributes:
             caloric_value:
                 description: "Caloric value (MJ/kg)"
