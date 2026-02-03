@@ -7,7 +7,7 @@ description: >
     and end-of-life pathways such as disassembly, recycling, treatment options,
     and CRM recovery-related information.
 license: CC BY-NC 4.0
-version: 0.0.1
+version: 0.0.3
 
 prefixes:
     linkml: https://w3id.org/linkml/
@@ -561,6 +561,9 @@ classes:
         annotations:
             references: "ESPR; CIRPASS; Battery Pass; King et al.; Jensen et al.; Berger et al.; Koppelaar et al.; Cruz et al.; Christensen et al."
         attributes:
+            beginning_of_life_information:
+                description: "Material composition and origin information at product beginning of life"
+                range: BeginningOfLifeInformation
             design_for_circularity:
                 description: "Design features that enable circular economy principles"
                 range: DesignForCircularity
@@ -573,6 +576,113 @@ classes:
             end_of_life_information:
                 description: "End-of-life pathways and recovery information"
                 range: EndOfLifeInformation
+
+    BeginningOfLifeInformation:
+        description: "Material composition and origin information at product beginning of life"
+        annotations:
+            sql_identifier: circ_bol_info
+            references: "CIRPASS; Battery Pass"
+        attributes:
+            material_composition_entries:
+                description: "Individual material composition entries with DMP references"
+                range: MaterialCompositionEntry
+                multivalued: true
+            product_level_summary:
+                description: "Aggregated product-level composition summary"
+                range: ProductLevelSummary
+
+    MaterialCompositionEntry:
+        description: "Information about a specific material used in the product"
+        annotations:
+            sql_identifier: circ_bol_material_entry
+        attributes:
+            dmp_reference:
+                description: "URI reference to the Digital Material Passport (DMP) for this material"
+                range: uri
+                annotations:
+                    sql_identifier: circ_bol_dmp_ref
+                    owl.filler: dcterms:references
+            material_mass:
+                description: "Mass of this material in the product"
+                range: float
+                annotations:
+                    sql_identifier: circ_bol_material_mass
+                    owl.filler: qudt:hasQuantityValue
+            material_type:
+                description: "Type of material (metal, polymer, ceramic, composite, etc.)"
+                range: string
+                annotations:
+                    sql_identifier: circ_bol_material_type
+                    owl.filler: chebi:CHEBI_59999
+            source_region:
+                description: "Geographic region where this material originated"
+                range: string
+                annotations:
+                    sql_identifier: circ_bol_source_region
+                    owl.filler: schema:location
+            virgin_content_percentage:
+                description: "Percentage of virgin content for this specific material"
+                range: float
+                annotations:
+                    sql_identifier: circ_bol_virgin_pct
+                    owl.filler: circ:virginContent
+            recycled_content_percentage:
+                description: "Percentage of recycled content for this specific material"
+                range: float
+                annotations:
+                    sql_identifier: circ_bol_recycled_pct
+                    owl.filler: circ:recycledContent
+                    references: "ESPR; Battery Pass"
+            renewable_content_percentage:
+                description: "Percentage of renewable content for this specific material"
+                range: float
+                annotations:
+                    sql_identifier: circ_bol_renewable_pct
+                    owl.filler: circ:renewableContent
+            supplier_reference:
+                description: "Reference to the supplier of this material (optional)"
+                range: string
+                annotations:
+                    sql_identifier: circ_bol_supplier_ref
+                    owl.filler: schema:supplier
+
+    ProductLevelSummary:
+        description: "Aggregated composition information at product level"
+        annotations:
+            sql_identifier: circ_bol_product_summary
+        attributes:
+            total_product_mass:
+                description: "Total mass of the product"
+                range: float
+                annotations:
+                    sql_identifier: circ_bol_total_mass
+                    owl.filler: qudt:hasQuantityValue
+                    references: "ESPR; Battery Pass"
+            overall_virgin_percentage:
+                description: "Overall percentage of virgin materials across all materials"
+                range: float
+                annotations:
+                    sql_identifier: circ_bol_overall_virgin_pct
+                    owl.filler: circ:overallVirginContent
+            overall_recycled_percentage:
+                description: "Overall percentage of recycled materials across all materials"
+                range: float
+                annotations:
+                    sql_identifier: circ_bol_overall_recycled_pct
+                    owl.filler: circ:overallRecycledContent
+                    references: "ESPR; Battery Pass; CIRPASS"
+            overall_renewable_percentage:
+                description: "Overall percentage of renewable materials across all materials"
+                range: float
+                annotations:
+                    sql_identifier: circ_bol_overall_renewable_pct
+                    owl.filler: circ:overallRenewableContent
+            number_of_materials_used:
+                description: "Total number of different materials used in the product"
+                range: integer
+                annotations:
+                    sql_identifier: circ_bol_num_materials
+                    owl.filler: circ:materialCount
 
     DesignForCircularity:
         description: "Design decisions and features that enable circular economy principles"

@@ -2,13 +2,23 @@
 
 All notable changes to the CE-RISE Circularity and End-of-Life Data Model will be documented in this file.
 
-## [0.0.2] - 2025-12-15
+## [0.0.3] - 2026-02-03
+### Added
+- BeginningOfLifeInformation section with material composition tracking and DMP references
+- MaterialCompositionEntry structure for vectorized material-level data (mass, type, source, content percentages per material)
+- ProductLevelSummary for aggregated product-level composition metrics
+- DMP reference support via URI linking to Digital Material Passports
 
+### Changed
+- Updated model description to include beginning of life material composition
+- Enhanced Key Design Principles with lifecycle completeness and material traceability
+
+
+## [0.0.2] - 2025-12-15
 ### Added
 - Missign references to lit etc. that were in Beta release of the data model.
 
 ## [0.0.1] - 2025-12-12
-
 ### Added
 - Initial project structure and repository setup from template: https://ce-rise-models.codeberg.page/template-data-model/
 - Complete data model structure for Circularity and End-of-Life with 4 implementation stages:

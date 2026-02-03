@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: CE-RISE Circularity and End-of-Life
 message: >-
-  v0.0.2 - Added refs from Beta data model release.
+  v0.0.3 - Added BeginningOfLifeInformation with material composition tracking and DMP references.
 type: software
 doi: 10.5281/zenodo.17912234
 authors:
@@ -17,7 +17,7 @@ identifiers:
 repository-code: 'https://codeberg.org/CE-RISE_models/circularity-and-eol'
 url: 'https://ce-rise-models.codeberg.page/circularity-and-eol/'
 abstract: >-
-  Data model capturing circularity and end-of-life information for products, including design-for-circularity attributes, performance factors and scores, and end-of-life pathways such as disassembly, recycling, treatment options, and CRM recovery-related information. The model provides an autonomous framework with generic assessment storage supporting multiple methodologies while maintaining interoperability potential.
+  Data model capturing circularity and end-of-life information for products, including material composition at beginning of life with DMP references, design-for-circularity attributes, performance factors and scores, and end-of-life pathways such as disassembly, recycling, treatment options, and CRM recovery-related information. The model creates a circular loop by linking materials used at product beginning of life to materials recovered at end of life.
 keywords:
   - CE-RISE
   - Circularity
