@@ -1,0 +1,1119 @@
+{
+    "$defs": {
+        "Assessment": {
+            "additionalProperties": false,
+            "description": "A single assessment instance with methodology and results",
+            "properties": {
+                "assessment_date": {
+                    "description": "Date of assessment",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "assessment_methodology": {
+                    "description": "Methodology used",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "assessment_reference": {
+                    "description": "External reference",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "assessment_score": {
+                    "description": "Overall score",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "assessment_type": {
+                    "description": "Type of assessment",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "assessment_version": {
+                    "description": "Version of methodology",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "certification_status": {
+                    "description": "Certification status",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "data_sources": {
+                    "description": "Data sources used",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "score_range": {
+                    "description": "Valid score range",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "score_unit": {
+                    "description": "Unit of score",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sub_scores": {
+                    "description": "Breakdown of score components",
+                    "items": {
+                        "$ref": "#/$defs/SubScore"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Assessment",
+            "type": "object"
+        },
+        "BeginningOfLifeInformation": {
+            "additionalProperties": false,
+            "description": "Material composition and origin information at product beginning of life",
+            "properties": {
+                "material_composition_entries": {
+                    "description": "Individual material composition entries with DMP references",
+                    "items": {
+                        "$ref": "#/$defs/MaterialCompositionEntry"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "product_level_summary": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ProductLevelSummary"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Aggregated product-level composition summary"
+                }
+            },
+            "title": "BeginningOfLifeInformation",
+            "type": "object"
+        },
+        "CRMRecovery": {
+            "additionalProperties": false,
+            "description": "Critical raw materials recovery information",
+            "properties": {
+                "critical_materials_list": {
+                    "description": "List of critical materials",
+                    "items": {
+                        "$ref": "#/$defs/CriticalMaterial"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "recovery_methods": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RecoveryMethods"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Methods for recovery"
+                },
+                "secondary_raw_materials": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SecondaryRawMaterials"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Secondary materials produced"
+                }
+            },
+            "title": "CRMRecovery",
+            "type": "object"
+        },
+        "CircularCapability": {
+            "additionalProperties": false,
+            "description": "Potential for circular economy strategies",
+            "properties": {
+                "recycling_potential": {
+                    "description": "Potential for material recycling",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "refurbishment_potential": {
+                    "description": "Potential for refurbishment",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "remanufacturing_potential": {
+                    "description": "Potential for remanufacturing",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "reuse_potential": {
+                    "description": "Potential for direct reuse",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CircularCapability",
+            "type": "object"
+        },
+        "CircularityAndEOL": {
+            "additionalProperties": false,
+            "description": "Root container for circularity and end-of-life information",
+            "properties": {
+                "beginning_of_life_information": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BeginningOfLifeInformation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Material composition and origin information at product beginning of life"
+                },
+                "circularity_assessments": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CircularityAssessments"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Generic container for circularity assessments"
+                },
+                "design_for_circularity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/DesignForCircularity"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Design features that enable circular economy principles"
+                },
+                "end_of_life_information": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/EndOfLifeInformation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "End-of-life pathways and recovery information"
+                },
+                "product_performance_factors": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ProductPerformanceFactors"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Quantifiable factors influencing circular performance"
+                }
+            },
+            "title": "CircularityAndEOL",
+            "type": "object"
+        },
+        "CircularityAssessments": {
+            "additionalProperties": false,
+            "description": "Container for circularity-related assessments of any type",
+            "properties": {
+                "assessments": {
+                    "description": "Collection of assessments performed",
+                    "items": {
+                        "$ref": "#/$defs/Assessment"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CircularityAssessments",
+            "type": "object"
+        },
+        "CollectionAndSorting": {
+            "additionalProperties": false,
+            "description": "Waste collection and sorting information",
+            "properties": {
+                "collection_schemes": {
+                    "description": "Available collection programs",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sorting_instructions": {
+                    "description": "Sorting guidance",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "take_back_programs": {
+                    "description": "Take-back program details",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "waste_classification": {
+                    "description": "Waste classification codes",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CollectionAndSorting",
+            "type": "object"
+        },
+        "CriticalMaterial": {
+            "additionalProperties": false,
+            "description": "Information about a critical raw material",
+            "properties": {
+                "concentration": {
+                    "description": "Concentration percentage",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "material_name": {
+                    "description": "Name of critical material",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "quantity": {
+                    "description": "Quantity present",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CriticalMaterial",
+            "type": "object"
+        },
+        "DesignForCircularity": {
+            "additionalProperties": false,
+            "description": "Design decisions and features that enable circular economy principles",
+            "properties": {
+                "disassembly_features": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/DisassemblyFeatures"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Features facilitating product disassembly"
+                },
+                "durability_features": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/DurabilityFeatures"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Features enhancing product durability and longevity"
+                },
+                "material_selection": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MaterialSelection"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Material choices supporting circularity"
+                },
+                "modular_design": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ModularDesign"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Modularity aspects of the product design"
+                }
+            },
+            "title": "DesignForCircularity",
+            "type": "object"
+        },
+        "DisassemblyFeatures": {
+            "additionalProperties": false,
+            "description": "Product disassembly characteristics",
+            "properties": {
+                "disassembly_instructions": {
+                    "description": "Disassembly guidance",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disassembly_time": {
+                    "description": "Time required for disassembly",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "fastener_types": {
+                    "description": "Types of fasteners used",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "required_tools": {
+                    "description": "Tools needed for disassembly",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "DisassemblyFeatures",
+            "type": "object"
+        },
+        "DurabilityFeatures": {
+            "additionalProperties": false,
+            "description": "Product durability and maintenance characteristics",
+            "properties": {
+                "expected_lifetime": {
+                    "description": "Expected operational lifetime",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "maintenance_schedule": {
+                    "description": "Maintenance requirements",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "repairability_index": {
+                    "description": "Repairability score or index",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "upgrade_capability": {
+                    "description": "Upgrade possibilities",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "DurabilityFeatures",
+            "type": "object"
+        },
+        "EndOfLifeInformation": {
+            "additionalProperties": false,
+            "description": "Comprehensive end-of-life pathways and material recovery information",
+            "properties": {
+                "collection_and_sorting": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CollectionAndSorting"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Collection and sorting systems"
+                },
+                "crm_recovery": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CRMRecovery"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Critical raw materials recovery"
+                },
+                "recycling_pathways": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RecyclingPathways"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Recycling routes and infrastructure"
+                },
+                "treatment_options": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TreatmentOptions"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Final treatment and disposal options"
+                }
+            },
+            "title": "EndOfLifeInformation",
+            "type": "object"
+        },
+        "EnergyRecovery": {
+            "additionalProperties": false,
+            "description": "Energy recovery from waste",
+            "properties": {
+                "caloric_value": {
+                    "description": "Caloric value (MJ/kg)",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "emission_factors": {
+                    "description": "Emission factors",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "EnergyRecovery",
+            "type": "object"
+        },
+        "Landfilling": {
+            "additionalProperties": false,
+            "description": "Landfill disposal information",
+            "properties": {
+                "landfill_classification": {
+                    "description": "Type of landfill",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "leaching_potential": {
+                    "description": "Leaching risk assessment",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Landfilling",
+            "type": "object"
+        },
+        "LifespanFactors": {
+            "additionalProperties": false,
+            "description": "Factors determining product lifespan and reliability",
+            "properties": {
+                "mean_time_between_failures": {
+                    "description": "MTBF reliability metric",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "obsolescence_factors": {
+                    "description": "Factors leading to obsolescence",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "service_life": {
+                    "description": "Expected service lifetime",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "warranty_period": {
+                    "description": "Warranty duration offered",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "LifespanFactors",
+            "type": "object"
+        },
+        "MaterialCompositionEntry": {
+            "additionalProperties": false,
+            "description": "Information about a specific material used in the product",
+            "properties": {
+                "dmp_reference": {
+                    "description": "URI reference to the Digital Material Passport (DMP) for this material",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "material_mass": {
+                    "description": "Mass of this material in the product",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "material_type": {
+                    "description": "Type of material (metal, polymer, ceramic, composite, etc.)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "recycled_content_percentage": {
+                    "description": "Percentage of recycled content for this specific material",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "renewable_content_percentage": {
+                    "description": "Percentage of renewable content for this specific material",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "source_region": {
+                    "description": "Geographic region where this material originated",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "supplier_reference": {
+                    "description": "Reference to the supplier of this material (optional)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "virgin_content_percentage": {
+                    "description": "Percentage of virgin content for this specific material",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "MaterialCompositionEntry",
+            "type": "object"
+        },
+        "MaterialSelection": {
+            "additionalProperties": false,
+            "description": "Material composition and selection for circularity",
+            "properties": {
+                "hazardous_substances": {
+                    "description": "Hazardous substances present",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "material_passport": {
+                    "description": "Material passport reference",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "recycled_content": {
+                    "description": "Percentage of recycled content",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "renewable_content": {
+                    "description": "Percentage of renewable content",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "MaterialSelection",
+            "type": "object"
+        },
+        "ModularDesign": {
+            "additionalProperties": false,
+            "description": "Product modularity characteristics",
+            "properties": {
+                "interchangeable_parts": {
+                    "description": "Parts that can be interchanged",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "modularity_level": {
+                    "description": "Degree of product modularity",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "standardized_interfaces": {
+                    "description": "Standardized connection interfaces",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ModularDesign",
+            "type": "object"
+        },
+        "NonRecyclableMaterials": {
+            "additionalProperties": false,
+            "description": "Information about non-recyclable materials",
+            "properties": {
+                "disposal_method": {
+                    "description": "Disposal method required",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "material_type": {
+                    "description": "Type of non-recyclable material",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "percentage": {
+                    "description": "Percentage of total",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "NonRecyclableMaterials",
+            "type": "object"
+        },
+        "ProductLevelSummary": {
+            "additionalProperties": false,
+            "description": "Aggregated composition information at product level",
+            "properties": {
+                "number_of_materials_used": {
+                    "description": "Total number of different materials used in the product",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "overall_recycled_percentage": {
+                    "description": "Overall percentage of recycled materials across all materials",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "overall_renewable_percentage": {
+                    "description": "Overall percentage of renewable materials across all materials",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "overall_virgin_percentage": {
+                    "description": "Overall percentage of virgin materials across all materials",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "total_product_mass": {
+                    "description": "Total mass of the product",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ProductLevelSummary",
+            "type": "object"
+        },
+        "ProductPerformanceFactors": {
+            "additionalProperties": false,
+            "description": "Quantifiable factors that influence circular performance",
+            "properties": {
+                "circular_capability": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CircularCapability"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Potential for circular economy strategies"
+                },
+                "lifespan_factors": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LifespanFactors"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Factors affecting product lifespan"
+                },
+                "resource_efficiency": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ResourceEfficiency"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Resource efficiency metrics"
+                }
+            },
+            "title": "ProductPerformanceFactors",
+            "type": "object"
+        },
+        "RecoveryMethods": {
+            "additionalProperties": false,
+            "description": "Methods for recovering critical materials",
+            "properties": {
+                "economic_viability": {
+                    "description": "Economic viability assessment",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extraction_process": {
+                    "description": "Extraction process description",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "recovery_rate": {
+                    "description": "Recovery rate percentage",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "RecoveryMethods",
+            "type": "object"
+        },
+        "RecyclableMaterials": {
+            "additionalProperties": false,
+            "description": "Information about recyclable materials",
+            "properties": {
+                "material_type": {
+                    "description": "Type of recyclable material",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "recycling_process": {
+                    "description": "Required recycling process",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "recycling_rate": {
+                    "description": "Recycling rate percentage",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "RecyclableMaterials",
+            "type": "object"
+        },
+        "RecyclingInfrastructure": {
+            "additionalProperties": false,
+            "description": "Infrastructure requirements for recycling",
+            "properties": {
+                "geographic_availability": {
+                    "description": "Geographic coverage",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "required_technology": {
+                    "description": "Technology needed",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "RecyclingInfrastructure",
+            "type": "object"
+        },
+        "RecyclingPathways": {
+            "additionalProperties": false,
+            "description": "Material recycling pathways and infrastructure",
+            "properties": {
+                "non_recyclable_materials": {
+                    "description": "Materials that cannot be recycled",
+                    "items": {
+                        "$ref": "#/$defs/NonRecyclableMaterials"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "recyclable_materials": {
+                    "description": "Materials that can be recycled",
+                    "items": {
+                        "$ref": "#/$defs/RecyclableMaterials"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "recycling_infrastructure": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RecyclingInfrastructure"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Required recycling infrastructure"
+                }
+            },
+            "title": "RecyclingPathways",
+            "type": "object"
+        },
+        "ResourceEfficiency": {
+            "additionalProperties": false,
+            "description": "Metrics related to resource use efficiency",
+            "properties": {
+                "energy_efficiency": {
+                    "description": "Energy consumption efficiency",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "material_intensity": {
+                    "description": "Material use per functional unit",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "waste_generation": {
+                    "description": "Waste generated during lifecycle",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "water_footprint": {
+                    "description": "Water consumption footprint",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ResourceEfficiency",
+            "type": "object"
+        },
+        "SecondaryRawMaterials": {
+            "additionalProperties": false,
+            "description": "Secondary materials from recovery",
+            "properties": {
+                "market_demand": {
+                    "description": "Market demand assessment",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "quality_grade": {
+                    "description": "Quality grade of materials",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SecondaryRawMaterials",
+            "type": "object"
+        },
+        "SpecialTreatment": {
+            "additionalProperties": false,
+            "description": "Special treatment requirements",
+            "properties": {
+                "biological_treatment": {
+                    "description": "Biological treatment options",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "hazardous_waste_treatment": {
+                    "description": "Hazardous waste treatment",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SpecialTreatment",
+            "type": "object"
+        },
+        "SubScore": {
+            "additionalProperties": false,
+            "description": "Component score within an assessment",
+            "properties": {
+                "sub_score_name": {
+                    "description": "Name of sub-score",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sub_score_value": {
+                    "description": "Value of sub-score",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "sub_score_weight": {
+                    "description": "Weight in overall score",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SubScore",
+            "type": "object"
+        },
+        "TreatmentOptions": {
+            "additionalProperties": false,
+            "description": "Final treatment and disposal methods",
+            "properties": {
+                "energy_recovery": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/EnergyRecovery"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Energy recovery potential"
+                },
+                "landfilling": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Landfilling"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Landfilling information"
+                },
+                "special_treatment": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SpecialTreatment"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Special treatment requirements"
+                }
+            },
+            "title": "TreatmentOptions",
+            "type": "object"
+        }
+    },
+    "$id": "https://ce-rise-models.codeberg.page/circularity-and-eol/",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "metamodel_version": "1.7.0",
+    "title": "circularity-and-eol",
+    "type": "object",
+    "version": "0.0.3"
+}
+
