@@ -1,7 +1,5 @@
 cff-version: 1.2.0
 title: CE-RISE Circularity and End-of-Life
-message: >-
-  v0.0.3 - Added BeginningOfLifeInformation with material composition tracking and DMP references.
 type: software
 doi: 10.5281/zenodo.17912234
 authors:
