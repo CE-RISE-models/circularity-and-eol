@@ -2,6 +2,11 @@
 
 All notable changes to the CE-RISE Circularity and End-of-Life Data Model will be documented in this file.
 
+## [0.1.0] - 2026-05-12
+### Added
+- Optional links from circularity and end-of-life records to the CE-RISE uncertainty quantification, metrological traceability, and data quality framework utility models.
+- Utility-model links for material composition, product-level summaries, material selection, disassembly and durability features, resource efficiency, lifespan factors, circular capability, circularity assessments, recycling pathways, CRM recovery, and treatment options.
+
 ## [0.0.3] - 2026-02-03
 ### Added
 - BeginningOfLifeInformation section with material composition tracking and DMP references

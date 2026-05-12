@@ -229,6 +229,7 @@ This identifier system enables seamless integration with databases and ensures c
 - **Recycling Infrastructure**: Connection to regional recycling facility databases
 - **CRM Markets**: Links to critical raw material market data and recovery technologies
 - **Standards Bodies**: Alignment with ISO 14040 series, EN 45555 series, and circular economy standards
+- **CE-RISE Utility Models**: Selected material composition, circularity performance, assessment, recycling, CRM recovery, and treatment records can optionally reference `uncertainty-quantification`, `metrological-traceability`, and `data-quality-framework` records
 
 
 ---

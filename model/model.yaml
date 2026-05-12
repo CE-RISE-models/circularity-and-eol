@@ -7,7 +7,7 @@ description: >
     and end-of-life pathways such as disassembly, recycling, treatment options,
     and CRM recovery-related information.
 license: CC BY-NC 4.0
-version: 0.0.3
+version: 0.1.0
 
 prefixes:
     linkml: https://w3id.org/linkml/
@@ -24,12 +24,18 @@ prefixes:
     dpv: https://w3id.org/dpv#
     odp: http://www.ontologydesignpatterns.org/cp/owl/
     bs: https://www.iso.org/standard/
+    uq: https://ce-rise-models.codeberg.page/uncertainty-quantification/
+    mt: https://ce-rise-models.codeberg.page/metrological-traceability/
+    dqf: https://ce-rise-models.codeberg.page/data-quality-framework/
 
 default_prefix: circ
 default_range: string
 
 imports:
     - linkml:types
+    - https://codeberg.org/CE-RISE-models/uncertainty-quantification/raw/tag/pages-v0.0.3/generated/schema
+    - https://codeberg.org/CE-RISE-models/metrological-traceability/raw/tag/pages-v0.0.3/generated/schema
+    - https://codeberg.org/CE-RISE-models/data-quality-framework/raw/tag/pages-v0.0.3/generated/schema
 
 slots:
     # Stage 1: Design for Circularity slots
@@ -645,6 +651,36 @@ classes:
                 annotations:
                     sql_identifier: circ_bol_supplier_ref
                     owl.filler: schema:supplier
+            material_composition_uncertainty_statements:
+                description: "Optional uncertainty statements for material mass, content percentages, source region, or supplier-reported material composition data"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_bol_material_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            material_composition_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for material composition measurements, methods, standards, calibrations, reference materials, or DMP-linked material evidence"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_bol_material_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            material_composition_data_quality_assessments:
+                description: "Optional data quality assessments for material composition data, DMP references, supplier evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_bol_material_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     ProductLevelSummary:
         description: "Aggregated composition information at product level"
@@ -683,6 +719,36 @@ classes:
                 annotations:
                     sql_identifier: circ_bol_num_materials
                     owl.filler: circ:materialCount
+            product_summary_uncertainty_statements:
+                description: "Optional uncertainty statements for aggregated product mass and material composition percentages"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_bol_summary_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            product_summary_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for aggregated composition calculations, measurement methods, standards, calibrations, or reference materials"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_bol_summary_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            product_summary_data_quality_assessments:
+                description: "Optional data quality assessments for aggregated composition data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_bol_summary_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     DesignForCircularity:
         description: "Design decisions and features that enable circular economy principles"
@@ -735,6 +801,36 @@ classes:
             material_passport:
                 description: "Material passport reference"
                 range: string
+            material_selection_uncertainty_statements:
+                description: "Optional uncertainty statements for recycled content, renewable content, hazardous substance information, or material selection data"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_design_material_selection_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            material_selection_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for material selection measurements, substance quantification, methods, standards, calibrations, or reference materials"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_design_material_selection_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            material_selection_data_quality_assessments:
+                description: "Optional data quality assessments for material selection data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_design_material_selection_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     DisassemblyFeatures:
         description: "Product disassembly characteristics"
@@ -754,6 +850,36 @@ classes:
             fastener_types:
                 description: "Types of fasteners used"
                 range: string
+            disassembly_features_uncertainty_statements:
+                description: "Optional uncertainty statements for disassembly time, required tools, procedural assumptions, or disassembly evidence"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_design_disassembly_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            disassembly_features_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for disassembly-time measurements, method definitions, test conditions, standards, or tooling assumptions"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_design_disassembly_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            disassembly_features_data_quality_assessments:
+                description: "Optional data quality assessments for disassembly data, instructions, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_design_disassembly_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     DurabilityFeatures:
         description: "Product durability and maintenance characteristics"
@@ -772,6 +898,36 @@ classes:
             maintenance_schedule:
                 description: "Maintenance requirements"
                 range: string
+            durability_features_uncertainty_statements:
+                description: "Optional uncertainty statements for expected lifetime, repairability index, upgrade capability, or maintenance schedule assumptions"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_design_durability_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            durability_features_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for durability measurements, lifetime tests, repairability methods, standards, calibrations, or reference data"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_design_durability_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            durability_features_data_quality_assessments:
+                description: "Optional data quality assessments for durability data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_design_durability_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     ProductPerformanceFactors:
         description: "Quantifiable factors that influence circular performance"
@@ -805,6 +961,36 @@ classes:
             waste_generation:
                 description: "Waste generated during lifecycle"
                 range: float
+            resource_efficiency_uncertainty_statements:
+                description: "Optional uncertainty statements for resource-efficiency metrics such as material intensity, energy efficiency, water footprint, or waste generation"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_perf_resource_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            resource_efficiency_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for resource-efficiency measurements, methods, functional units, standards, calibrations, or reference data"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_perf_resource_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            resource_efficiency_data_quality_assessments:
+                description: "Optional data quality assessments for resource-efficiency data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_perf_resource_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     LifespanFactors:
         description: "Factors determining product lifespan and reliability"
@@ -823,6 +1009,36 @@ classes:
             obsolescence_factors:
                 description: "Factors leading to obsolescence"
                 range: string
+            lifespan_factors_uncertainty_statements:
+                description: "Optional uncertainty statements for MTBF, warranty period, service-life estimates, or obsolescence assumptions"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_perf_lifespan_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            lifespan_factors_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for reliability measurements, lifetime tests, methods, standards, calibrations, or reference datasets"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_perf_lifespan_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            lifespan_factors_data_quality_assessments:
+                description: "Optional data quality assessments for lifespan and reliability data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_perf_lifespan_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     CircularCapability:
         description: "Potential for circular economy strategies"
@@ -841,6 +1057,36 @@ classes:
             recycling_potential:
                 description: "Potential for material recycling"
                 range: string
+            circular_capability_uncertainty_statements:
+                description: "Optional uncertainty statements for reuse, refurbishment, remanufacturing, or recycling-potential estimates"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_perf_capability_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            circular_capability_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for circular capability assessment methods, assumptions, standards, reference data, or boundary definitions"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_perf_capability_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            circular_capability_data_quality_assessments:
+                description: "Optional data quality assessments for circular capability data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_perf_capability_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     CircularityAssessments:
         description: "Container for circularity-related assessments of any type"
@@ -891,6 +1137,36 @@ classes:
             certification_status:
                 description: "Certification status"
                 range: string
+            assessment_uncertainty_statements:
+                description: "Optional uncertainty statements for assessment scores, methodology assumptions, boundaries, sub-scores, or certification-relevant results"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_assessment_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            assessment_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for assessment methods, reference standards, boundary definitions, data sources, or calculation chains"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_assessment_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            assessment_data_quality_assessments:
+                description: "Optional data quality assessments for assessment inputs, outputs, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_assessment_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     SubScore:
         description: "Component score within an assessment"
@@ -906,6 +1182,26 @@ classes:
             sub_score_weight:
                 description: "Weight in overall score"
                 range: float
+            sub_score_uncertainty_statements:
+                description: "Optional uncertainty statements for sub-score values, weights, or aggregation assumptions"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_assessment_sub_score_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            sub_score_data_quality_assessments:
+                description: "Optional data quality assessments for sub-score inputs, weights, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_assessment_sub_score_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     EndOfLifeInformation:
         description: "Comprehensive end-of-life pathways and material recovery information"
@@ -974,6 +1270,36 @@ classes:
             recycling_process:
                 description: "Required recycling process"
                 range: string
+            recyclable_materials_uncertainty_statements:
+                description: "Optional uncertainty statements for recyclable material classification, recycling rate, or process assumptions"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_recyclable_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            recyclable_materials_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for recycling-rate measurements, material classification methods, standards, or reference data"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_recyclable_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            recyclable_materials_data_quality_assessments:
+                description: "Optional data quality assessments for recyclable material and recycling-rate data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_recyclable_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     NonRecyclableMaterials:
         description: "Information about non-recyclable materials"
@@ -989,6 +1315,26 @@ classes:
             disposal_method:
                 description: "Disposal method required"
                 range: string
+            non_recyclable_materials_uncertainty_statements:
+                description: "Optional uncertainty statements for non-recyclable material percentages, classification, or disposal assumptions"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_non_recyclable_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            non_recyclable_materials_data_quality_assessments:
+                description: "Optional data quality assessments for non-recyclable material data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_non_recyclable_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     RecyclingInfrastructure:
         description: "Infrastructure requirements for recycling"
@@ -1033,6 +1379,36 @@ classes:
             concentration:
                 description: "Concentration percentage"
                 range: float
+            critical_material_uncertainty_statements:
+                description: "Optional uncertainty statements for critical material quantity, concentration, or identification"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_crm_material_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            critical_material_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for CRM quantity or concentration measurements, methods, standards, calibrations, or reference materials"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_crm_material_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            critical_material_data_quality_assessments:
+                description: "Optional data quality assessments for CRM identification, quantity, concentration, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_crm_material_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     RecoveryMethods:
         description: "Methods for recovering critical materials"
@@ -1048,6 +1424,36 @@ classes:
             economic_viability:
                 description: "Economic viability assessment"
                 range: string
+            recovery_methods_uncertainty_statements:
+                description: "Optional uncertainty statements for extraction process assumptions, recovery-rate estimates, or economic viability assessments"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_recovery_methods_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            recovery_methods_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for recovery-rate measurements, process methods, standards, or reference data"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_recovery_methods_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            recovery_methods_data_quality_assessments:
+                description: "Optional data quality assessments for recovery-method data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_recovery_methods_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     SecondaryRawMaterials:
         description: "Secondary materials from recovery"
@@ -1058,6 +1464,16 @@ classes:
             market_demand:
                 description: "Market demand assessment"
                 range: string
+            secondary_raw_materials_data_quality_assessments:
+                description: "Optional data quality assessments for secondary raw material quality grade, market demand, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_secondary_raw_materials_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     TreatmentOptions:
         description: "Final treatment and disposal methods"
@@ -1085,6 +1501,36 @@ classes:
             emission_factors:
                 description: "Emission factors"
                 range: string
+            energy_recovery_uncertainty_statements:
+                description: "Optional uncertainty statements for caloric value, emission factors, or energy-recovery assumptions"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_energy_recovery_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            energy_recovery_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for caloric-value measurements, emission-factor methods, standards, calibrations, or reference data"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_energy_recovery_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            energy_recovery_data_quality_assessments:
+                description: "Optional data quality assessments for energy-recovery and emission-factor data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_energy_recovery_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     Landfilling:
         description: "Landfill disposal information"
@@ -1095,6 +1541,36 @@ classes:
             leaching_potential:
                 description: "Leaching risk assessment"
                 range: string
+            landfilling_uncertainty_statements:
+                description: "Optional uncertainty statements for landfill classification, leaching potential, or disposal assumptions"
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_landfilling_uncertainty
+                    owl.filler: uq:uncertaintyStatement
+            landfilling_metrological_traceability_statements:
+                description: "Optional metrological traceability statements for leaching tests, classification methods, standards, calibrations, or reference data"
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_landfilling_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            landfilling_data_quality_assessments:
+                description: "Optional data quality assessments for landfill and leaching data, evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_landfilling_data_quality
+                    owl.filler: dqf:dataQualityAssessment
 
     SpecialTreatment:
         description: "Special treatment requirements"
@@ -1105,3 +1581,13 @@ classes:
             biological_treatment:
                 description: "Biological treatment options"
                 range: string
+            special_treatment_data_quality_assessments:
+                description: "Optional data quality assessments for hazardous waste, biological treatment, treatment-method evidence, provenance, completeness, or representativeness"
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: circ_eol_special_treatment_data_quality
+                    owl.filler: dqf:dataQualityAssessment
