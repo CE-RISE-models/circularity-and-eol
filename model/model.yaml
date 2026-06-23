@@ -1296,7 +1296,7 @@ classes:
                 description: "Type of recyclable material"
                 range: string
             recycling_rate:
-                description: "Recycling rate percentage"
+                description: "Recycling rate as a percentage, per WFD Art. 3 (recycling only - reprocessing into products/materials/substances). Distinct from the broader recovery rate in traceability (RecyclingEvent.recovery_percentage)."
                 range: float
             recycling_process:
                 description: "Required recycling process"

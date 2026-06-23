@@ -4,6 +4,9 @@ All notable changes to the CE-RISE Circularity and End-of-Life Data Model will b
 
 ## [Unreleased]
 
+### Changed
+- Clarified the `RecyclableMaterials.recycling_rate` description to state explicitly that it is a recycling rate per WFD Art. 3 (recycling only), distinct from the broader recovery rate in traceability. Description only - no rename or structural change.
+
 ### Added
 - `WEEERecyclingStream` class and a new `weee_recycling_streams` attribute on `RecyclingPathways`, providing WEEE-specific stream-level detail per Directive 2012/19/EU: WEEE category (new `WEEECategoryEnum`, Annex III), stream fraction, recovery / recycling / preparation-for-re-use rates, allocation of treatment outcome to product input, and treatment process reference. Complements the existing generic `RecyclableMaterials`.
 
