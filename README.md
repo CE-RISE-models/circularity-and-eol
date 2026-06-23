@@ -90,6 +90,7 @@ CircularityAndEOL (root)
 │       ├── SubScores (repeatable)
 │       │   ├── SubScoreName
 │       │   ├── SubScoreValue
+│       │   ├── SubScoreUnit (optional; for dimensional sub-scores)
 │       │   └── SubScoreWeight
 │       ├── DataSources
 │       ├── AssessmentReference
@@ -109,9 +110,17 @@ CircularityAndEOL (root)
     │   │   ├── MaterialType
     │   │   ├── Percentage
     │   │   └── DisposalMethod
-    │   └── RecyclingInfrastructure
-    │       ├── RequiredTechnology
-    │       └── GeographicAvailability
+    │   ├── RecyclingInfrastructure
+    │   │   ├── RequiredTechnology
+    │   │   └── GeographicAvailability
+    │   └── WEEERecyclingStream (per WEEE Directive 2012/19/EU)
+    │       ├── WEEECategory (Annex III: temperature-exchange/screens/lamps/large/small/small-IT)
+    │       ├── StreamFraction
+    │       ├── RecoveryRate (%)
+    │       ├── RecyclingRate (%)
+    │       ├── PreparationForReuseRate (%)
+    │       ├── InputAllocationPercentage
+    │       └── TreatmentProcess
     ├── CRMRecovery
     │   ├── CriticalMaterialsList
     │   │   ├── MaterialName
@@ -213,6 +222,8 @@ This identifier system enables seamless integration with databases and ensures c
 ---
 
 ## Development Roadmap
+
+> **Note:** This roadmap documents the model's initial development. The data model has since been further developed and refined — see [CHANGELOG.md](CHANGELOG.md) for the authoritative, up-to-date record of changes.
 
 | Step | Component | Criticalities Identified | Solutions Implemented | Status | Missing/TODO |
 |------|-----------|-------------------------|----------------------|--------|--------------|

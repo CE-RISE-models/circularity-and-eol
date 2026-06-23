@@ -7,7 +7,7 @@ description: >
     and end-of-life pathways such as disassembly, recycling, treatment options,
     and CRM recovery-related information.
 license: CC BY-NC 4.0
-version: 0.1.0
+version: 0.1.1
 
 prefixes:
     linkml: https://w3id.org/linkml/
