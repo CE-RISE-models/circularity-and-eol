@@ -1179,6 +1179,9 @@ classes:
             sub_score_value:
                 description: "Value of sub-score"
                 range: float
+            sub_score_unit:
+                description: "Unit of the sub-score value where it is dimensional (e.g. %, kg). Leave empty for dimensionless scores."
+                range: string
             sub_score_weight:
                 description: "Weight in overall score"
                 range: float
