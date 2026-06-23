@@ -1255,6 +1255,37 @@ classes:
             recycling_infrastructure:
                 description: "Required recycling infrastructure"
                 range: RecyclingInfrastructure
+            weee_recycling_streams:
+                description: "WEEE-specific recycling/recovery streams with stream-level rates and allocation of treatment outcome to product input, per Directive 2012/19/EU"
+                range: WEEERecyclingStream
+                multivalued: true
+
+    WEEERecyclingStream:
+        description: "WEEE-compliant recycling/recovery stream detail with stream-level rates and allocation of treatment outcome to product input, per Directive 2012/19/EU"
+        annotations:
+            references: "WEEE Directive 2012/19/EU; CE-RISE Deliverable 1.1"
+        attributes:
+            weee_category:
+                description: "WEEE category of the equipment (Directive 2012/19/EU Annex III)"
+                range: WEEECategoryEnum
+            stream_fraction:
+                description: "Treatment output fraction / stream (e.g. ferrous metals, non-ferrous metals, plastics, printed circuit boards, glass)"
+                range: string
+            recovery_rate:
+                description: "Recovery rate for this stream (percentage)"
+                range: float
+            recycling_rate:
+                description: "Recycling rate for this stream (percentage)"
+                range: float
+            preparation_for_reuse_rate:
+                description: "Preparation-for-re-use rate for this stream (percentage)"
+                range: float
+            input_allocation_percentage:
+                description: "Share of the product's material input allocated to this treatment outcome (percentage)"
+                range: float
+            treatment_process:
+                description: "Treatment process or facility reference for this stream"
+                range: string
 
     RecyclableMaterials:
         description: "Information about recyclable materials"
@@ -1591,3 +1622,20 @@ classes:
                 annotations:
                     sql_identifier: circ_eol_special_treatment_data_quality
                     owl.filler: dqf:dataQualityAssessment
+
+enums:
+    WEEECategoryEnum:
+        description: "WEEE equipment categories per Directive 2012/19/EU Annex III"
+        permissible_values:
+            TEMPERATURE_EXCHANGE_EQUIPMENT:
+                description: "Temperature exchange equipment"
+            SCREENS_MONITORS:
+                description: "Screens, monitors, and equipment containing screens with a surface greater than 100 cm2"
+            LAMPS:
+                description: "Lamps"
+            LARGE_EQUIPMENT:
+                description: "Large equipment (any external dimension more than 50 cm)"
+            SMALL_EQUIPMENT:
+                description: "Small equipment (no external dimension more than 50 cm)"
+            SMALL_IT_TELECOMMUNICATION_EQUIPMENT:
+                description: "Small IT and telecommunication equipment (no external dimension more than 50 cm)"
