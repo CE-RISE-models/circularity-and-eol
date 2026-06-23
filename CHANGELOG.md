@@ -2,7 +2,7 @@
 
 All notable changes to the CE-RISE Circularity and End-of-Life Data Model will be documented in this file.
 
-## [0.1.1] - 2026-06-23
+## [0.1.1] - 2026-06-24
 
 ### Changed
 - Clarified the `RecyclableMaterials.recycling_rate` description to state explicitly that it is a recycling rate per WFD Art. 3 (recycling only), distinct from the broader recovery rate in traceability. Description only - no rename or structural change.
